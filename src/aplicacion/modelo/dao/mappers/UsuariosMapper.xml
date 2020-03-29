@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='aplicacion.modelo.dao.mappers.UsuariosMapper'>
+
+	<resultMap type='Usuario' id='UsuariosResult'>
+		<id property='id' column='id' />
+		<result property='nombre' column='nombre' />
+		<result property='correo' column='correo' />
+		<result property='password' column='password' />
+	</resultMap>
+
+	<select id='loginUsuario' resultType='Usuario'>
+		SELECT * FROM usuario WHERE correo = #{correo} AND password = PASSWORD( #{password} )
+	</select>
+	
+	<select id='existeUsuario' resultType='Usuario'>
+		SELECT * FROM usuario WHERE correo = #{correo}
+	</select>
+	
+<!-- 	<insert id='insertUsuario' parameterType='map' useGeneratedKeys='true' keyProperty='id'> -->
+<!-- 		INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro,modoNocturno) -->
+<!-- 		VALUES(#{correo},#{nombre},#{password},#{foto},#{esValidado},#{fecha},#{modoNocturno}) -->
+<!-- 	</insert> -->
+	
+<!-- 	<delete id='delete' parameterType='Usuario'> -->
+<!-- 		DELETE FROM usuario WHERE id = #{id} -->
+<!-- 	</delete> -->
+	
+	<select id='selectPorId' resultType='Usuario'>
+		SELECT * FROM usuario WHERE id = #{idUsuario}
+	</select>
+	
+</mapper>

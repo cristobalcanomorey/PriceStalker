@@ -15,6 +15,7 @@
 		usuario = (Usuario) request.getAttribute("usuario");
 		if(usuario != null){
 		%>
+		<li><%=usuario.getNombre() %></li>
 		<li><a href="Lista">Tu lista de productos</a></li>
 		<li><a href="Logout">Cerrar sesión</a></li>
 		<li><a href="AdminUser">Administrar usuario</a></li>

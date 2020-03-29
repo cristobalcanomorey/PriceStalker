@@ -3,19 +3,21 @@ package aplicacion.modelo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import aplicacion.controlador.Login;
 import aplicacion.controlador.Principal;
+import aplicacion.modelo.dao.MyBatisUtil;
 
 public class LogSingleton {
 	private static final LogSingleton INSTANCE = new LogSingleton();
 	private Logger loggerPrincipal = LoggerFactory.getLogger(Principal.class);
-//	private Logger loggerLogin = LoggerFactory.getLogger(Login.class);
+	private Logger loggerLogin = LoggerFactory.getLogger(Login.class);
 //	private Logger loggerLogout = LoggerFactory.getLogger(Logout.class);
 //	private Logger loggerRegistro = LoggerFactory.getLogger(Registro.class);
 //	private Logger loggerMailEJB = LoggerFactory.getLogger(MailEJB.class);
 //	private Logger loggerValidacion = LoggerFactory.getLogger(Validacion.class);
 //	private Logger loggerBaja = LoggerFactory.getLogger(Baja.class);
 //	private Logger loggerTimerEJB = LoggerFactory.getLogger(TimerEJB.class);
-//	private Logger loggerMyBatisUtil = LoggerFactory.getLogger(MyBatisUtil.class);
+	private Logger loggerMyBatisUtil = LoggerFactory.getLogger(MyBatisUtil.class);
 
 	/**
 	 * Constructor privado
@@ -46,9 +48,9 @@ public class LogSingleton {
 	 * 
 	 * @return Logger
 	 */
-//	public Logger getLoggerLogin() {
-//		return loggerLogin;
-//	}
+	public Logger getLoggerLogin() {
+		return loggerLogin;
+	}
 
 	/***
 	 * Obtener el logger para Historial
@@ -118,8 +120,8 @@ public class LogSingleton {
 	 * 
 	 * @return Logger
 	 */
-//	public Logger getLoggerMyBatisUtil() {
-//		return loggerMyBatisUtil;
-//	}
+	public Logger getLoggerMyBatisUtil() {
+		return loggerMyBatisUtil;
+	}
 
 }
