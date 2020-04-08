@@ -20,4 +20,30 @@ public class UsuarioDAO {
 			sqlSession.close();
 		}
 	}
+
+	public static boolean existeUsuario(String correo) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		Usuario usuario = null;
+		try {
+			if (correo != null) {
+				UsuariosMapper usuariosMapper = sqlSession.getMapper(UsuariosMapper.class);
+				usuario = usuariosMapper.existeUsuario(correo);
+			}
+		} finally {
+			sqlSession.close();
+		}
+		return usuario != null;
+	}
+
+	public static void registrarUsuario(String nombre, String correo, String password) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			if (nombre != null & correo != null & password != null) {
+				UsuariosMapper usuariosMapper = sqlSession.getMapper(UsuariosMapper.class);
+				usuariosMapper.registrarUsuario(nombre, correo, password);
+			}
+		} finally {
+			sqlSession.close();
+		}
+	}
 }

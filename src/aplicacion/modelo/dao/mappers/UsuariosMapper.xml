@@ -19,10 +19,10 @@
 		SELECT * FROM usuario WHERE correo = #{correo}
 	</select>
 	
-<!-- 	<insert id='insertUsuario' parameterType='map' useGeneratedKeys='true' keyProperty='id'> -->
-<!-- 		INSERT INTO usuario (correo,nombre,password,foto,validado,fechaRegistro,modoNocturno) -->
-<!-- 		VALUES(#{correo},#{nombre},#{password},#{foto},#{esValidado},#{fecha},#{modoNocturno}) -->
-<!-- 	</insert> -->
+	<insert id='registrarUsuario' useGeneratedKeys='true' keyProperty='id'>
+		INSERT INTO usuario (nombre,correo,password)
+		VALUES(#{nombre},#{correo},#{password})
+	</insert>
 	
 <!-- 	<delete id='delete' parameterType='Usuario'> -->
 <!-- 		DELETE FROM usuario WHERE id = #{id} -->

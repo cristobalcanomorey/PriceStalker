@@ -20,7 +20,7 @@
 		<li><a href="Logout">Cerrar sesión</a></li>
 		<li><a href="AdminUser">Administrar usuario</a></li>
 		<%}else{ %>
-		<li><a href="Register">Registrarse</a></li>
+		<li><a href="Registro">Registrarse</a></li>
 		<li><a href="Login">Iniciar sesión</a></li>
 		<%} %>
 	</ul>

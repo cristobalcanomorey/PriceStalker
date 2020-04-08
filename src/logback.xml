@@ -15,11 +15,25 @@
       </encoder>
    </appender>
    
-   <logger name="vista.Main" level="ERROR" additivity="false">
+   <appender name="DEBUGFILE" class="ch.qos.logback.core.FileAppender">
+      <file> PriceStalkerDebug.txt </file>
+      <append>true</append>
+      <encoder>
+         <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+      </encoder>
+   </appender>
+   
+   <logger name="aplicacion.controlador.Principal" level="ERROR" additivity="false">
+    <appender-ref ref="ERRORFILE" />
+  </logger>
+  <logger name="aplicacion.controlador.Login" level="ERROR" additivity="false">
+    <appender-ref ref="ERRORFILE" />
+  </logger>
+  <logger name="aplicacion.controlador.Registro" level="ERROR" additivity="false">
     <appender-ref ref="ERRORFILE" />
   </logger>
  
   <root level="DEBUG">
-    <appender-ref ref="ERRORFILE" />
+    <appender-ref ref="DEBUGFILE" />
   </root>
 </configuration>

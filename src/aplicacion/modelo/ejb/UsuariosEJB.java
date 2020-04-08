@@ -10,7 +10,17 @@ import aplicacion.modelo.pojo.Usuario;
 @LocalBean
 public class UsuariosEJB {
 
-	public Usuario loginUsuario(String correo, String paswd) {
-		return UsuarioDAO.loginUsuario(correo, paswd);
+	public Usuario loginUsuario(String correo, String password) {
+		return UsuarioDAO.loginUsuario(correo, password);
 	}
+
+	public boolean existeUsuario(String correo) {
+		return UsuarioDAO.existeUsuario(correo);
+	}
+
+	public Usuario registrarUsuario(String nombre, String correo, String password) {
+		UsuarioDAO.registrarUsuario(nombre, correo, password);
+		return loginUsuario(correo, password);
+	}
+
 }
