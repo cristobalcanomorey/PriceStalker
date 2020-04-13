@@ -72,7 +72,7 @@ public class Registro extends HttpServlet {
 						try {
 							response.sendRedirect("Principal");
 						} catch (IOException e) {
-							log.getLoggerRegistro().error("Se ha producido un error en GET Registro: ", e);
+							log.getLoggerRegistro().error("Se ha producido un error en POST Registro: ", e);
 						}
 					} else {
 						error = USUARIO_YA_EXISTE;
@@ -92,7 +92,7 @@ public class Registro extends HttpServlet {
 			try {
 				rs.forward(request, response);
 			} catch (ServletException | IOException e) {
-				log.getLoggerRegistro().error("Se ha producido un error en GET Registro: ", e);
+				log.getLoggerRegistro().error("Se ha producido un error en POST Registro: ", e);
 			}
 		}
 	}
