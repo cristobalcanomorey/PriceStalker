@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import aplicacion.controlador.Login;
+import aplicacion.controlador.Logout;
 import aplicacion.controlador.Principal;
 import aplicacion.controlador.Registro;
 import aplicacion.modelo.dao.MyBatisUtil;
@@ -12,7 +13,7 @@ public class LogSingleton {
 	private static final LogSingleton INSTANCE = new LogSingleton();
 	private Logger loggerPrincipal = LoggerFactory.getLogger(Principal.class);
 	private Logger loggerLogin = LoggerFactory.getLogger(Login.class);
-//	private Logger loggerLogout = LoggerFactory.getLogger(Logout.class);
+	private Logger loggerLogout = LoggerFactory.getLogger(Logout.class);
 	private Logger loggerRegistro = LoggerFactory.getLogger(Registro.class);
 //	private Logger loggerMailEJB = LoggerFactory.getLogger(MailEJB.class);
 //	private Logger loggerValidacion = LoggerFactory.getLogger(Validacion.class);
@@ -67,9 +68,9 @@ public class LogSingleton {
 	 * 
 	 * @return Logger
 	 */
-//	public Logger getLoggerLogout() {
-//		return loggerLogout;
-//	}
+	public Logger getLoggerLogout() {
+		return loggerLogout;
+	}
 
 	/***
 	 * Obtener el logger para Registro

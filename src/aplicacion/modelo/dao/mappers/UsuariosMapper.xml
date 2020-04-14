@@ -21,7 +21,7 @@
 	
 	<insert id='registrarUsuario' useGeneratedKeys='true' keyProperty='id'>
 		INSERT INTO usuario (nombre,correo,password)
-		VALUES(#{nombre},#{correo},#{password})
+		VALUES(#{nombre},#{correo},PASSWORD(#{password}))
 	</insert>
 	
 <!-- 	<delete id='delete' parameterType='Usuario'> -->

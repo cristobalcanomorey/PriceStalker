@@ -55,7 +55,7 @@ public class Registro extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession(true);
 		LogSingleton log = LogSingleton.getInstance();
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 		String error = null;

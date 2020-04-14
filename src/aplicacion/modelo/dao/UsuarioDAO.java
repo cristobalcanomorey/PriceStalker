@@ -41,6 +41,7 @@ public class UsuarioDAO {
 			if (nombre != null & correo != null & password != null) {
 				UsuariosMapper usuariosMapper = sqlSession.getMapper(UsuariosMapper.class);
 				usuariosMapper.registrarUsuario(nombre, correo, password);
+				sqlSession.commit();
 			}
 		} finally {
 			sqlSession.close();
