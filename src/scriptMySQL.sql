@@ -28,6 +28,7 @@ CREATE TABLE producto (
 
 CREATE TABLE contenido (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    precioObjetivo DECIMAL(10,2) NOT NULL,
     idLista INT NOT NULL,
     foreign key (idLista)
      references lista (id)
@@ -42,7 +43,7 @@ CREATE TABLE contenido (
 
 CREATE TABLE precio (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    cantidad DECIMAL(10,2) NOT NULL,
+    coste DECIMAL(10,2) NOT NULL,
     fecha DATETIME NOT NULL,
     idProducto INT NOT NULL,
     foreign key (idProducto)
@@ -76,47 +77,47 @@ VALUES ('Corsair K70 LUX - Teclado mecánico Gaming, retroiluminación LED roja,
 INSERT INTO producto (nombre,link)
 VALUES ('PNY VCQRTX8000-PB - Tarjeta gráfica (Quadro RTX 8000, 48 GB, GDDR6, 7680 x 4320 Pixeles, PCI Express x16 3.0, 1 Ventilador(es))','https://www.amazon.es/PNY-VCQRTX8000-PB-Tarjeta-gr%C3%A1fica-Ventilador/dp/B07NH3HKG9/ref=sr_1_1?__mk_es_ES=%C3%85M%C3%85Z%C3%95%C3%91&dchild=1&qid=1584727093&sr=8-1&srs=11606862031');
 
-INSERT INTO contenido (idLista, idProducto)
-VALUES (1,1);
+INSERT INTO contenido (precioObjetivo, idLista, idProducto)
+VALUES (16.01,1,1);
 
-INSERT INTO contenido (idLista, idProducto)
-VALUES (1,2);
+INSERT INTO contenido (precioObjetivo, idLista, idProducto)
+VALUES (98.69,1,2);
 
-INSERT INTO contenido (idLista, idProducto)
-VALUES (1,3);
+INSERT INTO contenido (precioObjetivo, idLista, idProducto)
+VALUES (0.50,1,3);
 
-INSERT INTO contenido (idLista, idProducto)
-VALUES (2,4);
+INSERT INTO contenido (precioObjetivo, idLista, idProducto)
+VALUES (128.99,2,4);
 
-INSERT INTO contenido (idLista, idProducto)
-VALUES (2,5);
+INSERT INTO contenido (precioObjetivo, idLista, idProducto)
+VALUES (6700.33,2,5);
 
-INSERT INTO precio (cantidad,fecha,idProducto)
+INSERT INTO precio (coste,fecha,idProducto)
 VALUES (18.99,NOW(),1);
 
-INSERT INTO precio (cantidad,fecha,idProducto)
+INSERT INTO precio (coste,fecha,idProducto)
 VALUES (17.49,SUBDATE(NOW(),1),1);
 
-INSERT INTO precio (cantidad,fecha,idProducto)
+INSERT INTO precio (coste,fecha,idProducto)
 VALUES (180.69,NOW(),2);
 
-INSERT INTO precio (cantidad,fecha,idProducto)
+INSERT INTO precio (coste,fecha,idProducto)
 VALUES (99.69,SUBDATE(NOW(),1),2);
 
-INSERT INTO precio (cantidad,fecha,idProducto)
+INSERT INTO precio (coste,fecha,idProducto)
 VALUES (2.98,NOW(),3);
 
-INSERT INTO precio (cantidad,fecha,idProducto)
+INSERT INTO precio (coste,fecha,idProducto)
 VALUES (0.98,SUBDATE(NOW(),1),3);
 
-INSERT INTO precio (cantidad,fecha,idProducto)
+INSERT INTO precio (coste,fecha,idProducto)
 VALUES (207.98,NOW(),4);
 
-INSERT INTO precio (cantidad,fecha,idProducto)
+INSERT INTO precio (coste,fecha,idProducto)
 VALUES (129.99,SUBDATE(NOW(),1),4);
 
-INSERT INTO precio (cantidad,fecha,idProducto)
+INSERT INTO precio (coste,fecha,idProducto)
 VALUES (7000.00,NOW(),5);
 
-INSERT INTO precio (cantidad,fecha,idProducto)
+INSERT INTO precio (coste,fecha,idProducto)
 VALUES (6754.33,SUBDATE(NOW(),1),5);
