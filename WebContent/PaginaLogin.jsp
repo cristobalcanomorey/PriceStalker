@@ -16,7 +16,7 @@
 		<p>Correo electrónico</p>
 		<input name="correo" type="email">
 		<p>Contraseña</p>
-		<input name="password" type="password">
+		<input name="password2" type="password">
 		<input type="submit" value="Iniciar sesión">
 	</form>
 	<%

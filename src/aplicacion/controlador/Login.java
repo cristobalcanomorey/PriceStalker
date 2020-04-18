@@ -57,7 +57,11 @@ public class Login extends HttpServlet {
 			throws ServletException, IOException {
 		LogSingleton log = LogSingleton.getInstance();
 		String correo = request.getParameter("correo");
-		String password = request.getParameter("password");
+		/*
+		 * Importante no modificar el nombre del parametro "password2" para que
+		 * AdminUser funcione correctamente.
+		 */
+		String password = request.getParameter("password2");
 		Usuario usuario = usuariosEJB.loginUsuario(correo, password);
 		if (usuario == null) {
 			try {

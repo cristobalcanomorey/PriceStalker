@@ -23,4 +23,8 @@ public class UsuariosEJB {
 		return loginUsuario(correo, password);
 	}
 
+	public void editarUsuario(String correoOriginal, String nombreNuevo, String correoNuevo, String passwordNuevo) {
+		UsuarioDAO.editarUsuario(correoOriginal, nombreNuevo, correoNuevo, passwordNuevo);
+	}
+
 }

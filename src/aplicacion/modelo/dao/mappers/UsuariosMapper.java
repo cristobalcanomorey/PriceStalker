@@ -11,4 +11,7 @@ public interface UsuariosMapper {
 
 	public void registrarUsuario(@Param("nombre") String nombre, @Param("correo") String correo,
 			@Param("password") String password);
+
+	public void editarUsuario(@Param("correoOriginal") String correoOriginal, @Param("nombreNuevo") String nombreNuevo,
+			@Param("correoNuevo") String correoNuevo, @Param("passwordNuevo") String passwordNuevo);
 }

@@ -24,6 +24,11 @@
 		VALUES(#{nombre},#{correo},PASSWORD(#{password}))
 	</insert>
 	
+	<update id="editarUsuario">
+		UPDATE usuario SET nombre = #{nombreNuevo}, correo = #{correoNuevo}, password = PASSWORD(#{passwordNuevo})
+		WHERE correo = #{correoOriginal}
+	</update>
+	
 <!-- 	<delete id='delete' parameterType='Usuario'> -->
 <!-- 		DELETE FROM usuario WHERE id = #{id} -->
 <!-- 	</delete> -->
