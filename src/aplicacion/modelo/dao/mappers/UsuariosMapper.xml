@@ -29,12 +29,8 @@
 		WHERE correo = #{correoOriginal}
 	</update>
 	
-<!-- 	<delete id='delete' parameterType='Usuario'> -->
-<!-- 		DELETE FROM usuario WHERE id = #{id} -->
-<!-- 	</delete> -->
-	
-	<select id='selectPorId' resultType='Usuario'>
-		SELECT * FROM usuario WHERE id = #{idUsuario}
-	</select>
-	
+	<delete id='eliminarUsuario'>
+		DELETE FROM usuario WHERE id = #{id}
+	</delete>
+		
 </mapper>

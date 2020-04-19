@@ -27,4 +27,8 @@ public class UsuariosEJB {
 		UsuarioDAO.editarUsuario(correoOriginal, nombreNuevo, correoNuevo, passwordNuevo);
 	}
 
+	public void eliminarUsuario(Usuario usuario) {
+		UsuarioDAO.eliminarUsuario(usuario.getId());
+	}
+
 }

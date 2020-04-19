@@ -31,7 +31,7 @@
 		<input name="confirmaPassword2" type="password" required>
 		<input type="submit" value="Editar usuario">
 	</form>
-	<button id="eliminarUsuario">Eliminar usuario</button>
+	<a href="DelUser">Eliminar usuario</a>
 	<%
 		}else{
 	%>
