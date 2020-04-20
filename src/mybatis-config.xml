@@ -4,6 +4,7 @@
 	<properties resource='jdbc.properties' />
 	<typeAliases>
 		<typeAlias type='aplicacion.modelo.pojo.Usuario' alias='Usuario'></typeAlias>
+		<typeAlias type='aplicacion.modelo.pojo.Producto' alias='Producto'></typeAlias>
 	</typeAliases>
 	<environments default='development'>
 		<environment id='development'>
@@ -18,5 +19,6 @@
 	</environments>
 	<mappers>
 		<mapper resource='aplicacion/modelo/dao/mappers/UsuariosMapper.xml' />
+		<mapper resource='aplicacion/modelo/dao/mappers/ProductosMapper.xml' />
 	</mappers>
 </configuration>

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='aplicacion.modelo.dao.mappers.ProductosMapper'>
+
+	<resultMap type='Producto' id='ProductosResult'>
+		<id property='id' column='id' />
+		<result property='nombre' column='nombre' />
+		<result property='link' column='link' />
+		<result property='imgLink' column='imgLink' />
+		<result property='coste' column='coste' />
+		<result property='fecha' column='fecha' />
+	</resultMap>
+
+	<select id='getProductosPorUserId' resultType='ProductosResult'>
+	SELECT producto.id,producto.nombre,producto.link,producto.imgLink,o.coste,o.fecha
+FROM lista,producto,contenido,`precio` o
+	LEFT JOIN `precio` b
+		ON o.idProducto = b.idProducto AND o.fecha &lt; b.fecha
+WHERE lista.idUsuario = #{id} AND 
+	lista.id = contenido.idLista AND
+    producto.id = contenido.idProducto AND
+    producto.id = o.idProducto AND
+	b.fecha is NULL;
+	</select>
+			
+</mapper>
