@@ -7,6 +7,7 @@ public class Producto {
 	private Integer id;
 	private String nombre;
 	private String link;
+	private Double precioObjetivo;
 	private String imgLink;
 	private Double coste;
 	private Date fecha;
@@ -37,6 +38,14 @@ public class Producto {
 
 	public void setLink(String link) {
 		this.link = link;
+	}
+
+	public Double getPrecioObjetivo() {
+		return precioObjetivo;
+	}
+
+	public void setPrecioObjetivo(Double precioObjetivo) {
+		this.precioObjetivo = precioObjetivo;
 	}
 
 	public String getImgLink() {

@@ -8,13 +8,14 @@
 		<id property='id' column='id' />
 		<result property='nombre' column='nombre' />
 		<result property='link' column='link' />
+		<result property='precioObjetivo' column='precioObjetivo' />
 		<result property='imgLink' column='imgLink' />
 		<result property='coste' column='coste' />
 		<result property='fecha' column='fecha' />
 	</resultMap>
 
-	<select id='getProductosPorUserId' resultType='ProductosResult'>
-	SELECT producto.id,producto.nombre,producto.link,producto.imgLink,o.coste,o.fecha
+	<select id='getProductosPorUserId' resultMap='ProductosResult'>
+	SELECT producto.id,producto.nombre,producto.link,contenido.precioObjetivo,producto.imgLink,o.coste,o.fecha
 FROM lista,producto,contenido,`precio` o
 	LEFT JOIN `precio` b
 		ON o.idProducto = b.idProducto AND o.fecha &lt; b.fecha
