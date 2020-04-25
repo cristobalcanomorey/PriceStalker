@@ -40,7 +40,7 @@ public class DelUser extends HttpServlet {
 			try {
 				rs.forward(request, response);
 			} catch (ServletException | IOException e) {
-				log.getLoggerPrincipal().error("Se ha producido un error en GET DelUser: ", e);
+				log.getLoggerDelUser().error("Se ha producido un error en GET DelUser: ", e);
 			}
 		} else {
 			response.sendRedirect("Principal");
@@ -74,7 +74,7 @@ public class DelUser extends HttpServlet {
 				try {
 					rs.forward(request, response);
 				} catch (ServletException | IOException e) {
-					log.getLoggerRegistro().error("Se ha producido un error en POST DelUser: ", e);
+					log.getLoggerDelUser().error("Se ha producido un error en POST DelUser: ", e);
 				}
 			}
 		} else {

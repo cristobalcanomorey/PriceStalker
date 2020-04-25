@@ -48,8 +48,8 @@
 					%>
 						<tr>
 							<td><a href="<%=producto.getLink()%>"><%=producto.getNombre()%></a></td>
-							<td><%=producto.getCoste()%></td>
-							<td><%=producto.getPrecioObjetivo()%></td>
+							<td><%=producto.getCoste()%> €</td>
+							<td><%=producto.getPrecioObjetivo()%> €</td>
 							<td><img alt="<%=producto.getNombre()%>" src="<%=producto.getImgLink()%>"></td>
 							<td><a href="Grafica?producto=<%=producto.getId()%>">Gráfica</a></td>
 							<td><a href="Eliminar?producto=<%=producto.getId()%>">Eliminar producto</a></td>

@@ -15,7 +15,7 @@
 	</resultMap>
 
 	<select id='getProductosPorUserId' resultMap='ProductosResult'>
-	SELECT producto.id,producto.nombre,producto.link,contenido.precioObjetivo,producto.imgLink,o.coste,o.fecha
+	SELECT contenido.id,producto.nombre,producto.link,contenido.precioObjetivo,producto.imgLink,o.coste,o.fecha
 FROM lista,producto,contenido,`precio` o
 	LEFT JOIN `precio` b
 		ON o.idProducto = b.idProducto AND o.fecha &lt; b.fecha

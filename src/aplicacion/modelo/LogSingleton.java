@@ -3,6 +3,10 @@ package aplicacion.modelo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import aplicacion.controlador.AdminUser;
+import aplicacion.controlador.DelUser;
+import aplicacion.controlador.Grafica;
+import aplicacion.controlador.Lista;
 import aplicacion.controlador.Login;
 import aplicacion.controlador.Logout;
 import aplicacion.controlador.Principal;
@@ -15,6 +19,10 @@ public class LogSingleton {
 	private Logger loggerLogin = LoggerFactory.getLogger(Login.class);
 	private Logger loggerLogout = LoggerFactory.getLogger(Logout.class);
 	private Logger loggerRegistro = LoggerFactory.getLogger(Registro.class);
+	private Logger loggerGrafica = LoggerFactory.getLogger(Grafica.class);
+	private Logger loggerAdminUser = LoggerFactory.getLogger(AdminUser.class);
+	private Logger loggerLista = LoggerFactory.getLogger(Lista.class);
+	private Logger loggerDelUser = LoggerFactory.getLogger(DelUser.class);
 //	private Logger loggerMailEJB = LoggerFactory.getLogger(MailEJB.class);
 //	private Logger loggerValidacion = LoggerFactory.getLogger(Validacion.class);
 //	private Logger loggerBaja = LoggerFactory.getLogger(Baja.class);
@@ -124,6 +132,42 @@ public class LogSingleton {
 	 */
 	public Logger getLoggerMyBatisUtil() {
 		return loggerMyBatisUtil;
+	}
+
+	/***
+	 * Obtener el logger para Grafica
+	 * 
+	 * @return Logger
+	 */
+	public Logger getLoggerGrafica() {
+		return loggerGrafica;
+	}
+
+	/***
+	 * Obtener el logger para AdminUser
+	 * 
+	 * @return Logger
+	 */
+	public Logger getLoggerAdminUser() {
+		return loggerAdminUser;
+	}
+
+	/***
+	 * Obtener el logger para Lista
+	 * 
+	 * @return Logger
+	 */
+	public Logger getLoggerLista() {
+		return loggerLista;
+	}
+
+	/***
+	 * Obtener el logger para DelUser
+	 * 
+	 * @return Logger
+	 */
+	public Logger getLoggerDelUser() {
+		return loggerDelUser;
 	}
 
 }

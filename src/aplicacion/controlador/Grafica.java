@@ -3,7 +3,6 @@ package aplicacion.controlador;
 import java.io.IOException;
 
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,8 +15,8 @@ import aplicacion.modelo.ejb.ProductosEJB;
 import aplicacion.modelo.ejb.SesionesEJB;
 import aplicacion.modelo.pojo.Usuario;
 
-@WebServlet("/Lista")
-public class Lista extends HttpServlet {
+@WebServlet("/Grafica")
+public class Grafica extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
@@ -32,14 +31,18 @@ public class Lista extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		LogSingleton log = LogSingleton.getInstance();
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
-		if (usuario != null) {
-			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaLista.jsp");
-			request.setAttribute("usuario", usuario);
-			request.setAttribute("productos", productosEJB.productosPorUserId(usuario));
+		String idContenido = request.getParameter("id");
+		if (usuario != null && idContenido != null) {
+			int contenidoId = -1;
 			try {
-				rs.forward(request, response);
-			} catch (ServletException | IOException e) {
-				log.getLoggerLista().error("Se ha producido un error en GET Lista: ", e);
+				contenidoId = Integer.parseInt(idContenido);
+			} catch (Exception e) {
+				log.getLoggerGrafica().error("Se ha producido un error en GET Grafica: ", e);
+			}
+			if (contenidoId > 0) {
+				int idProducto = productosEJB.obtenerPreciosDeProductoPorIdContenido(idContenido);
+			} else {
+				response.sendRedirect("Principal");
 			}
 		} else {
 			response.sendRedirect("Principal");

@@ -42,7 +42,7 @@ public class AdminUser extends HttpServlet {
 			try {
 				rs.forward(request, response);
 			} catch (ServletException | IOException e) {
-				log.getLoggerPrincipal().error("Se ha producido un error en GET AdminUser: ", e);
+				log.getLoggerAdminUser().error("Se ha producido un error en GET AdminUser: ", e);
 			}
 		} else {
 			response.sendRedirect("Principal");
@@ -92,7 +92,7 @@ public class AdminUser extends HttpServlet {
 				try {
 					rs.forward(request, response);
 				} catch (ServletException | IOException e) {
-					log.getLoggerRegistro().error("Se ha producido un error en POST AdminUser: ", e);
+					log.getLoggerAdminUser().error("Se ha producido un error en POST AdminUser: ", e);
 				}
 			}
 		} else {
