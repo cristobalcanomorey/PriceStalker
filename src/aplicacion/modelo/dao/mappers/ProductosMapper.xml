@@ -25,5 +25,10 @@ WHERE lista.idUsuario = #{id} AND
     producto.id = o.idProducto AND
 	b.fecha is NULL;
 	</select>
+	
+	<select id="getProductoPorIdContenido" resultType="Producto">
+	select * from producto
+	where id = (select idProducto from contenido where id = #{idContenido});
+	</select>
 			
 </mapper>

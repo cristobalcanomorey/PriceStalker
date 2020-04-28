@@ -17,4 +17,8 @@ public class ProductosEJB {
 		return ProductoDAO.getProductosPorUserId(usuario.getId());
 	}
 
+	public Producto obtenerProductoPorIdContenido(String idContenido) {
+		return ProductoDAO.getProductoPorIdContenido(idContenido);
+	}
+
 }

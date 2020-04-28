@@ -10,4 +10,6 @@ public interface ProductosMapper {
 
 	public ArrayList<Producto> getProductosPorUserId(@Param("id") Integer id);
 
+	public Producto getProductoPorIdContenido(@Param("idContenido") String idContenido);
+
 }

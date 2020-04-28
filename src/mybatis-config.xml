@@ -5,6 +5,7 @@
 	<typeAliases>
 		<typeAlias type='aplicacion.modelo.pojo.Usuario' alias='Usuario'></typeAlias>
 		<typeAlias type='aplicacion.modelo.pojo.Producto' alias='Producto'></typeAlias>
+		<typeAlias type='aplicacion.modelo.pojo.Precio' alias='Precio'></typeAlias>
 	</typeAliases>
 	<environments default='development'>
 		<environment id='development'>
@@ -20,5 +21,6 @@
 	<mappers>
 		<mapper resource='aplicacion/modelo/dao/mappers/UsuariosMapper.xml' />
 		<mapper resource='aplicacion/modelo/dao/mappers/ProductosMapper.xml' />
+		<mapper resource='aplicacion/modelo/dao/mappers/PreciosMapper.xml' />
 	</mappers>
 </configuration>

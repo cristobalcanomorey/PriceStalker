@@ -19,4 +19,14 @@ public class ProductoDAO {
 		}
 	}
 
+	public static Producto getProductoPorIdContenido(String idContenido) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			ProductosMapper productosMapper = sqlSession.getMapper(ProductosMapper.class);
+			return productosMapper.getProductoPorIdContenido(idContenido);
+		} finally {
+			sqlSession.close();
+		}
+	}
+
 }

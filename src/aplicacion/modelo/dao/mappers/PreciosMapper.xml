@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='aplicacion.modelo.dao.mappers.PreciosMapper'>
+
+	<resultMap type='Precio' id='PreciosResult'>
+		<id property='id' column='id' />
+		<result property='coste' column='coste' />
+		<result property='fecha' column='fecha' />
+		<result property='idProducto' column='idProducto' />
+	</resultMap>
+
+	<select id='obtenerPreciosDeProductoPorIdContenido' resultMap='PreciosResult'>
+	select * from precio
+where idProducto = (select idProducto from contenido
+where id=#{contenidoId});
+	</select>
+			
+</mapper>

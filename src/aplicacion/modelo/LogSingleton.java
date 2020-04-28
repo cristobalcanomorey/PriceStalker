@@ -12,6 +12,7 @@ import aplicacion.controlador.Logout;
 import aplicacion.controlador.Principal;
 import aplicacion.controlador.Registro;
 import aplicacion.modelo.dao.MyBatisUtil;
+import aplicacion.modelo.ejb.GraficasEJB;
 
 public class LogSingleton {
 	private static final LogSingleton INSTANCE = new LogSingleton();
@@ -20,6 +21,7 @@ public class LogSingleton {
 	private Logger loggerLogout = LoggerFactory.getLogger(Logout.class);
 	private Logger loggerRegistro = LoggerFactory.getLogger(Registro.class);
 	private Logger loggerGrafica = LoggerFactory.getLogger(Grafica.class);
+	private Logger loggerGraficasEJB = LoggerFactory.getLogger(GraficasEJB.class);
 	private Logger loggerAdminUser = LoggerFactory.getLogger(AdminUser.class);
 	private Logger loggerLista = LoggerFactory.getLogger(Lista.class);
 	private Logger loggerDelUser = LoggerFactory.getLogger(DelUser.class);
@@ -168,6 +170,10 @@ public class LogSingleton {
 	 */
 	public Logger getLoggerDelUser() {
 		return loggerDelUser;
+	}
+
+	public Logger getLoggerGraficasEJB() {
+		return loggerGraficasEJB;
 	}
 
 }
