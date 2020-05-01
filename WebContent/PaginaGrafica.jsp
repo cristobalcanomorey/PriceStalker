@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="aplicacion.modelo.pojo.Usuario" %>
 <%@page import="aplicacion.modelo.pojo.Producto" %>
 <%!Usuario usuario = null; %>
 <%!Producto producto = null; %>
 <%!String labels = null; %>
 <%!String data = null; %>
+<%!String fecha = ""; %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +29,7 @@
 			if(usuario != null){
 		%>
 		<li><%=usuario.getNombre() %></li>
-		<li><a href="AddProducto">Añadir producto a lista</a></li>
+		<li><a href="Lista">Tu lista de productos</a></li>
 		<li><a href="Logout">Cerrar sesión</a></li>
 		<li><a href="AdminUser">Administrar usuario</a></li>
 		<%} %>
@@ -35,13 +37,17 @@
 	<h1>Detalles del producto</h1>
 	<%
 		if(producto != null){
+			String pattern = "dd/MM/yyyy";
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+			fecha = simpleDateFormat.format(producto.getFecha());
 	%>
 	<div>
 		<div><img src="<%=producto.getImgLink() %>" alt="imágen del producto"></div>
 		<div>Nombre: <a href="<%= producto.getLink()%>"><%=producto.getNombre() %></a></div>
 		<div>Precio actual: <%=producto.getCoste() %>€</div>
 		<div>Precio objetivo: <%=producto.getPrecioObjetivo() %>€</div>
-		<div>Fecha de la última revisión: <%=producto.getFecha() %></div>
+		<div>Fecha de la última revisión: <%=fecha %></div>
+		<a href="Eliminar?producto=<%=producto.getId()%>">Eliminar este producto de tu lista</a>
 	</div>
 	<%
 			if(labels != null & data != null){

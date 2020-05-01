@@ -12,4 +12,9 @@ public interface ProductosMapper {
 
 	public Producto getProductoPorIdContenido(@Param("idContenido") String idContenido);
 
+	public Integer existeProducto(@Param("enlace") String enlace);
+
+	public void insertProducto(@Param("nombre") String nombre, @Param("enlace") String enlace,
+			@Param("imgLink") String imgLink);
+
 }

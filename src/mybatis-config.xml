@@ -22,5 +22,6 @@
 		<mapper resource='aplicacion/modelo/dao/mappers/UsuariosMapper.xml' />
 		<mapper resource='aplicacion/modelo/dao/mappers/ProductosMapper.xml' />
 		<mapper resource='aplicacion/modelo/dao/mappers/PreciosMapper.xml' />
+		<mapper resource='aplicacion/modelo/dao/mappers/ListasMapper.xml' />
 	</mappers>
 </configuration>

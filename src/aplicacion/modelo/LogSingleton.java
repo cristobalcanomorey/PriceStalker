@@ -3,6 +3,7 @@ package aplicacion.modelo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import aplicacion.controlador.AddProducto;
 import aplicacion.controlador.AdminUser;
 import aplicacion.controlador.DelUser;
 import aplicacion.controlador.Grafica;
@@ -24,6 +25,7 @@ public class LogSingleton {
 	private Logger loggerGraficasEJB = LoggerFactory.getLogger(GraficasEJB.class);
 	private Logger loggerAdminUser = LoggerFactory.getLogger(AdminUser.class);
 	private Logger loggerLista = LoggerFactory.getLogger(Lista.class);
+	private Logger loggerAddProducto = LoggerFactory.getLogger(AddProducto.class);
 	private Logger loggerDelUser = LoggerFactory.getLogger(DelUser.class);
 //	private Logger loggerMailEJB = LoggerFactory.getLogger(MailEJB.class);
 //	private Logger loggerValidacion = LoggerFactory.getLogger(Validacion.class);
@@ -72,6 +74,10 @@ public class LogSingleton {
 //	public Logger getLoggerHistorial() {
 //		return loggerHistorial;
 //	}
+
+	public Logger getLoggerAddProducto() {
+		return loggerAddProducto;
+	}
 
 	/***
 	 * Obtener el logger para Logout

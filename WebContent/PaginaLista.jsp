@@ -3,7 +3,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="aplicacion.modelo.pojo.Usuario" %>
 <%@page import="aplicacion.modelo.pojo.Producto" %>
+<%@page import="aplicacion.modelo.pojo.ProductoSinPrecio" %>
 <%!ArrayList<Producto> productos; %>
+<%!ArrayList<ProductoSinPrecio> productosSinPrecios; %>
 <%!Usuario usuario = null; %>
 <!DOCTYPE html>
 <html>
@@ -14,6 +16,7 @@
 <body>
 	<%
 		productos = (ArrayList<Producto>) request.getAttribute("productos");
+		productosSinPrecios = (ArrayList<ProductoSinPrecio>) request.getAttribute("productosSinPrecios");
 		usuario = (Usuario) request.getAttribute("usuario");
 	%>
 	<ul>
@@ -29,8 +32,8 @@
 	</ul>
 	<h1>Lista de productos</h1>
 	<%
-		if(productos != null){
-			if(!productos.isEmpty()){
+		if(productos != null | productosSinPrecios != null){
+			if(!productos.isEmpty() | !productosSinPrecios.isEmpty()){
 				
 				%>
 				<table>
@@ -43,24 +46,36 @@
 						<th></th>
 					</tr>
 				<%
-				
-				for(Producto producto : productos){
-					%>
-						<tr>
-							<td><a href="<%=producto.getLink()%>"><%=producto.getNombre()%></a></td>
-							<td><%=producto.getCoste()%> €</td>
-							<td><%=producto.getPrecioObjetivo()%> €</td>
-							<td><img alt="<%=producto.getNombre()%>" src="<%=producto.getImgLink()%>"></td>
-							<td><a href="Grafica?producto=<%=producto.getId()%>">Gráfica</a></td>
-							<td><a href="Eliminar?producto=<%=producto.getId()%>">Eliminar producto</a></td>
-						</tr>
-					<%
+				if(!productosSinPrecios.isEmpty()){
+					for(ProductoSinPrecio productoSinPrecio : productosSinPrecios){
+						%>
+							<tr>
+								<td><a href="<%=productoSinPrecio.getLink()%>"><%=productoSinPrecio.getNombre()%></a></td>
+								<td><%=productoSinPrecio.getPrecioObjetivo()%> €</td>
+								<td><img alt="<%=productoSinPrecio.getNombre()%>" src="<%=productoSinPrecio.getImgLink()%>"></td>
+								<td><a href="Grafica?producto=<%=productoSinPrecio.getId()%>">Gráfica</a></td>
+								<td><a href="Eliminar?producto=<%=productoSinPrecio.getId()%>">Eliminar producto</a></td>
+							</tr>
+						<%
+					}
 				}
-				
+				if(!productos.isEmpty()){
+					for(Producto producto : productos){
+						%>
+							<tr>
+								<td><a href="<%=producto.getLink()%>"><%=producto.getNombre()%></a></td>
+								<td><%=producto.getCoste()%> €</td>
+								<td><%=producto.getPrecioObjetivo()%> €</td>
+								<td><img alt="<%=producto.getNombre()%>" src="<%=producto.getImgLink()%>"></td>
+								<td><a href="Grafica?producto=<%=producto.getId()%>">Gráfica</a></td>
+								<td><a href="Eliminar?producto=<%=producto.getId()%>">Eliminar producto</a></td>
+							</tr>
+						<%
+					}	
+				}
 				%>
 				</table>
 				<%
-				
 			}
 		}
 	%>

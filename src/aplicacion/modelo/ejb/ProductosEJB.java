@@ -21,4 +21,12 @@ public class ProductosEJB {
 		return ProductoDAO.getProductoPorIdContenido(idContenido);
 	}
 
+	public Integer existeProducto(String enlace) {
+		return ProductoDAO.existeProducto(enlace);
+	}
+
+	public void insertProducto(String nombre, String enlace, String imgLink) {
+		ProductoDAO.insertProducto(nombre, enlace, imgLink);
+	}
+
 }

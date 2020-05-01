@@ -1,5 +1,6 @@
 package aplicacion.modelo.ejb;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.ejb.LocalBean;
@@ -28,12 +29,16 @@ public class GraficasEJB {
 	public String fechasEnPreciosAJson(ArrayList<Precio> precios) {
 		String resul = null;
 		if (!precios.isEmpty()) {
+			String pattern = "dd/MM/yyyy";
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+			String fecha;
 			resul = "[";
-			for (int i = 0; i < precios.size(); i++) {
-				if (i != precios.size() - 1) {
-					resul += "'" + precios.get(i).getFecha().toString() + "'" + ",";
+			for (int i = precios.size() - 1; i >= 0; i--) {
+				fecha = simpleDateFormat.format(precios.get(i).getFecha());
+				if (i == 0) {
+					resul += "'" + fecha + "'" + "]";
 				} else {
-					resul += "'" + precios.get(i).getFecha().toString() + "'" + "]";
+					resul += "'" + fecha + "'" + ",";
 				}
 			}
 		}
@@ -44,11 +49,11 @@ public class GraficasEJB {
 		String resul = null;
 		if (!precios.isEmpty()) {
 			resul = "[";
-			for (int i = 0; i < precios.size(); i++) {
-				if (i != precios.size() - 1) {
-					resul += "'" + precios.get(i).getCoste() + "'" + ",";
-				} else {
+			for (int i = precios.size() - 1; i >= 0; i--) {
+				if (i == 0) {
 					resul += "'" + precios.get(i).getCoste() + "'" + "]";
+				} else {
+					resul += "'" + precios.get(i).getCoste() + "'" + ",";
 				}
 			}
 		}

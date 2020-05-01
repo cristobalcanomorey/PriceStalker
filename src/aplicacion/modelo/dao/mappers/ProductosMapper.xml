@@ -13,6 +13,14 @@
 		<result property='coste' column='coste' />
 		<result property='fecha' column='fecha' />
 	</resultMap>
+	
+	<resultMap type='ProductoSinPrecios' id='ProductoSinPreciosResult'>
+		<id property='id' column='id' />
+		<result property='nombre' column='nombre' />
+		<result property='link' column='link' />
+		<result property='precioObjetivo' column='precioObjetivo' />
+		<result property='imgLink' column='imgLink' />
+	</resultMap>
 
 	<select id='getProductosPorUserId' resultMap='ProductosResult'>
 	SELECT contenido.id,producto.nombre,producto.link,contenido.precioObjetivo,producto.imgLink,o.coste,o.fecha
@@ -27,8 +35,23 @@ WHERE lista.idUsuario = #{id} AND
 	</select>
 	
 	<select id="getProductoPorIdContenido" resultType="Producto">
-	select * from producto
-	where id = (select idProducto from contenido where id = #{idContenido});
+	select contenido.id,producto.nombre,producto.link,contenido.precioObjetivo,producto.imgLink,o.coste,o.fecha
+from producto,contenido, `precio` o
+	LEFT JOIN `precio` b
+		ON o.idProducto = b.idProducto AND o.fecha &lt; b.fecha
+where producto.id = contenido.idProducto AND
+producto.id = (select idProducto from contenido where id = #{idContenido}) AND
+producto.id = o.idProducto AND
+b.fecha IS NULl;
 	</select>
-			
+	
+	<select id="existeProducto" resultType="java.lang.Integer">
+		select id from producto where link = #{enlace};
+	</select>
+	
+	<insert id='insertProducto' useGeneratedKeys='true' keyProperty='id'>
+		INSERT INTO producto (nombre,link,imgLink)
+		VALUES(#{nombre},#{enlace},#{imgLink})
+	</insert>
+				
 </mapper>

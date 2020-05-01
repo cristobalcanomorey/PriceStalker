@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='aplicacion.modelo.dao.mappers.ListasMapper'>
+	
+	<select id="getNombreLista" resultType="String">
+		select nombre from lista where idUsuario = #{id};
+	</select>
+	
+	<select id="getIdLista" resultType="java.lang.Integer">
+		select id from lista where idUsuario = #{idUsuario};
+	</select>
+	
+	<insert id='insertLista' useGeneratedKeys='true' keyProperty='id'>
+		INSERT INTO lista (nombre,idUsuario)
+		VALUES(#{nombreLista},#{id})
+	</insert>
+	
+	<insert id='addContenido' useGeneratedKeys='true' keyProperty='id'>
+		INSERT INTO contenido (precioObjetivo,idLista,idProducto)
+		VALUES(#{costeObjetivo},#{idLista},#{idProducto})
+	</insert>
+			
+</mapper>
