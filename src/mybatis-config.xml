@@ -5,6 +5,7 @@
 	<typeAliases>
 		<typeAlias type='aplicacion.modelo.pojo.Usuario' alias='Usuario'></typeAlias>
 		<typeAlias type='aplicacion.modelo.pojo.Producto' alias='Producto'></typeAlias>
+		<typeAlias type='aplicacion.modelo.pojo.ProductoSinPrecio' alias='ProductoSinPrecio'></typeAlias>
 		<typeAlias type='aplicacion.modelo.pojo.Precio' alias='Precio'></typeAlias>
 	</typeAliases>
 	<environments default='development'>

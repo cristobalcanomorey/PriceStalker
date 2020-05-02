@@ -57,7 +57,24 @@ public class Grafica extends HttpServlet {
 					log.getLoggerGrafica().error("Se ha producido un error en GET Grafica: ", e);
 				}
 			} else {
-				response.sendRedirect("Principal");
+				String nombreDelProducto = productosEJB.getNombrePorIdContenido(idContenido);
+				if (nombreDelProducto != null) {
+					if (nombreDelProducto.equals("Producto sin nombre")) {
+						RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaGrafica.jsp");
+						request.setAttribute("usuario", usuario);
+						request.setAttribute("error",
+								"Todavía no hemos obtenido ningún dato de este producto, vuelve a intentarlo mañana.");
+						try {
+							rs.forward(request, response);
+						} catch (ServletException | IOException e) {
+							log.getLoggerGrafica().error("Se ha producido un error en GET Grafica: ", e);
+						}
+					} else {
+						response.sendRedirect("Principal");
+					}
+				} else {
+					response.sendRedirect("Principal");
+				}
 			}
 		} else {
 			response.sendRedirect("Principal");

@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import aplicacion.controlador.AddProducto;
 import aplicacion.controlador.AdminUser;
 import aplicacion.controlador.DelUser;
+import aplicacion.controlador.Eliminar;
 import aplicacion.controlador.Grafica;
 import aplicacion.controlador.Lista;
 import aplicacion.controlador.Login;
@@ -14,6 +15,7 @@ import aplicacion.controlador.Principal;
 import aplicacion.controlador.Registro;
 import aplicacion.modelo.dao.MyBatisUtil;
 import aplicacion.modelo.ejb.GraficasEJB;
+import aplicacion.modelo.ejb.ProductosEJB;
 
 public class LogSingleton {
 	private static final LogSingleton INSTANCE = new LogSingleton();
@@ -23,14 +25,12 @@ public class LogSingleton {
 	private Logger loggerRegistro = LoggerFactory.getLogger(Registro.class);
 	private Logger loggerGrafica = LoggerFactory.getLogger(Grafica.class);
 	private Logger loggerGraficasEJB = LoggerFactory.getLogger(GraficasEJB.class);
+	private Logger loggerProductosEJB = LoggerFactory.getLogger(ProductosEJB.class);
 	private Logger loggerAdminUser = LoggerFactory.getLogger(AdminUser.class);
 	private Logger loggerLista = LoggerFactory.getLogger(Lista.class);
+	private Logger loggerEliminar = LoggerFactory.getLogger(Eliminar.class);
 	private Logger loggerAddProducto = LoggerFactory.getLogger(AddProducto.class);
 	private Logger loggerDelUser = LoggerFactory.getLogger(DelUser.class);
-//	private Logger loggerMailEJB = LoggerFactory.getLogger(MailEJB.class);
-//	private Logger loggerValidacion = LoggerFactory.getLogger(Validacion.class);
-//	private Logger loggerBaja = LoggerFactory.getLogger(Baja.class);
-//	private Logger loggerTimerEJB = LoggerFactory.getLogger(TimerEJB.class);
 	private Logger loggerMyBatisUtil = LoggerFactory.getLogger(MyBatisUtil.class);
 
 	/**
@@ -66,15 +66,6 @@ public class LogSingleton {
 		return loggerLogin;
 	}
 
-	/***
-	 * Obtener el logger para Historial
-	 * 
-	 * @return Logger
-	 */
-//	public Logger getLoggerHistorial() {
-//		return loggerHistorial;
-//	}
-
 	public Logger getLoggerAddProducto() {
 		return loggerAddProducto;
 	}
@@ -96,42 +87,6 @@ public class LogSingleton {
 	public Logger getLoggerRegistro() {
 		return loggerRegistro;
 	}
-
-	/***
-	 * Obtener el logger para MailEJB
-	 * 
-	 * @return Logger
-	 */
-//	public Logger getLoggerMailEJB() {
-//		return loggerMailEJB;
-//	}
-
-	/***
-	 * Obtener el logger para Validacion
-	 * 
-	 * @return Logger
-	 */
-//	public Logger getLoggerValidacion() {
-//		return loggerValidacion;
-//	}
-
-	/***
-	 * Obtener el logger para Baja
-	 * 
-	 * @return Logger
-	 */
-//	public Logger getLoggerBaja() {
-//		return loggerBaja;
-//	}
-
-	/***
-	 * Obtener el logger para TimerSingleton
-	 * 
-	 * @return Logger
-	 */
-//	public Logger getLoggerTimerSingleton() {
-//		return loggerTimerEJB;
-//	}
 
 	/***
 	 * Obtener el logger para MyBatisUtil
@@ -180,6 +135,14 @@ public class LogSingleton {
 
 	public Logger getLoggerGraficasEJB() {
 		return loggerGraficasEJB;
+	}
+
+	public Logger getLoggerProductosEJB() {
+		return loggerProductosEJB;
+	}
+
+	public Logger getLoggerEliminar() {
+		return loggerEliminar;
 	}
 
 }

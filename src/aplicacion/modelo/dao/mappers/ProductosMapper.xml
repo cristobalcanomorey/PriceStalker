@@ -14,13 +14,14 @@
 		<result property='fecha' column='fecha' />
 	</resultMap>
 	
-	<resultMap type='ProductoSinPrecios' id='ProductoSinPreciosResult'>
+	<resultMap type='ProductoSinPrecio' id='ProductoSinPrecioResult'>
 		<id property='id' column='id' />
 		<result property='nombre' column='nombre' />
 		<result property='link' column='link' />
 		<result property='precioObjetivo' column='precioObjetivo' />
 		<result property='imgLink' column='imgLink' />
 	</resultMap>
+		
 
 	<select id='getProductosPorUserId' resultMap='ProductosResult'>
 	SELECT contenido.id,producto.nombre,producto.link,contenido.precioObjetivo,producto.imgLink,o.coste,o.fecha
@@ -41,17 +42,42 @@ from producto,contenido, `precio` o
 		ON o.idProducto = b.idProducto AND o.fecha &lt; b.fecha
 where producto.id = contenido.idProducto AND
 producto.id = (select idProducto from contenido where id = #{idContenido}) AND
+contenido.id = (select id from contenido where id = #{idContenido}) and
 producto.id = o.idProducto AND
-b.fecha IS NULl;
+b.fecha IS NULL;
 	</select>
 	
 	<select id="existeProducto" resultType="java.lang.Integer">
 		select id from producto where link = #{enlace};
 	</select>
 	
+	<select id="productosSinPrecioPorUserId" resultMap="ProductoSinPrecioResult">
+	select contenido.id,producto.nombre,producto.link,contenido.precioObjetivo,producto.imgLink from producto,contenido
+where producto.id = contenido.idProducto AND
+producto.id not in (select precio.idProducto from precio) AND
+contenido.idLista = (select lista.id from lista where lista.idUsuario = #{idUsuario});
+	</select>
+	
+	<select id="getProductoAEliminar" resultMap="ProductoSinPrecioResult">
+	select contenido.id,producto.nombre,producto.link,contenido.precioObjetivo,producto.imgLink from producto, contenido
+where contenido.idProducto = producto.id AND
+contenido.id = #{contenidoId};
+	</select>
+	
+	<select id="getNombrePorIdContenido" resultType="String">
+	select nombre from producto
+where id = (select idProducto from contenido where id = #{contenidoId});
+	</select>
+	
 	<insert id='insertProducto' useGeneratedKeys='true' keyProperty='id'>
 		INSERT INTO producto (nombre,link,imgLink)
 		VALUES(#{nombre},#{enlace},#{imgLink})
 	</insert>
+	
+	<delete id="eliminarProductoDeLaLista">
+	delete from contenido
+where idLista = (select id from lista where idUsuario = #{idUsuario}) AND
+id = #{contenidoId};
+	</delete>
 				
 </mapper>

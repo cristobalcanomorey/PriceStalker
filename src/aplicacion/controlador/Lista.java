@@ -36,7 +36,7 @@ public class Lista extends HttpServlet {
 			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaLista.jsp");
 			request.setAttribute("usuario", usuario);
 			request.setAttribute("productos", productosEJB.productosPorUserId(usuario));
-			request.setAttribute("productosSinPrecios", productosEJB.productosSinPreciosPorUserId(usuario));
+			request.setAttribute("productosSinPrecio", productosEJB.productosSinPrecioPorUserId(usuario));
 			try {
 				rs.forward(request, response);
 			} catch (ServletException | IOException e) {

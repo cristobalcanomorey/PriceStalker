@@ -9,6 +9,7 @@
 <%!String labels = null; %>
 <%!String data = null; %>
 <%!String fecha = ""; %>
+<%!String error = null; %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +23,7 @@
 		labels = (String) request.getAttribute("labels");
 		data = (String) request.getAttribute("data");
 		usuario = (Usuario) request.getAttribute("usuario");
+		error = (String) request.getAttribute("error");
 	%>
 	<ul>
 		<li><a href="Principal">Price Stalker</a></li>
@@ -90,6 +92,12 @@
         </script>
         <%
 			}
+        } else if(error != null){
+        %>
+        	<div class="error">
+        		<%=error %>
+        	</div>	
+        <%
         }
         %>
 </body>

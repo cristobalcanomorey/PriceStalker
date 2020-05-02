@@ -5,7 +5,7 @@
 <%@page import="aplicacion.modelo.pojo.Producto" %>
 <%@page import="aplicacion.modelo.pojo.ProductoSinPrecio" %>
 <%!ArrayList<Producto> productos; %>
-<%!ArrayList<ProductoSinPrecio> productosSinPrecios; %>
+<%!ArrayList<ProductoSinPrecio> productosSinPrecio; %>
 <%!Usuario usuario = null; %>
 <!DOCTYPE html>
 <html>
@@ -16,7 +16,7 @@
 <body>
 	<%
 		productos = (ArrayList<Producto>) request.getAttribute("productos");
-		productosSinPrecios = (ArrayList<ProductoSinPrecio>) request.getAttribute("productosSinPrecios");
+		productosSinPrecio = (ArrayList<ProductoSinPrecio>) request.getAttribute("productosSinPrecio");
 		usuario = (Usuario) request.getAttribute("usuario");
 	%>
 	<ul>
@@ -32,8 +32,8 @@
 	</ul>
 	<h1>Lista de productos</h1>
 	<%
-		if(productos != null | productosSinPrecios != null){
-			if(!productos.isEmpty() | !productosSinPrecios.isEmpty()){
+		if(productos != null | productosSinPrecio != null){
+			if(!productos.isEmpty() | !productosSinPrecio.isEmpty()){
 				
 				%>
 				<table>
@@ -46,11 +46,12 @@
 						<th></th>
 					</tr>
 				<%
-				if(!productosSinPrecios.isEmpty()){
-					for(ProductoSinPrecio productoSinPrecio : productosSinPrecios){
+				if(!productosSinPrecio.isEmpty()){
+					for(ProductoSinPrecio productoSinPrecio : productosSinPrecio){
 						%>
 							<tr>
 								<td><a href="<%=productoSinPrecio.getLink()%>"><%=productoSinPrecio.getNombre()%></a></td>
+								<td>Hasta que se escanee el producto se desconoce el precio actual</td>
 								<td><%=productoSinPrecio.getPrecioObjetivo()%> €</td>
 								<td><img alt="<%=productoSinPrecio.getNombre()%>" src="<%=productoSinPrecio.getImgLink()%>"></td>
 								<td><a href="Grafica?producto=<%=productoSinPrecio.getId()%>">Gráfica</a></td>
