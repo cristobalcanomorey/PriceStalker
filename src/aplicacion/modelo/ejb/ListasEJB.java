@@ -1,9 +1,12 @@
 package aplicacion.modelo.ejb;
 
+import java.util.ArrayList;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import aplicacion.modelo.dao.ListaDAO;
+import aplicacion.modelo.pojo.Contenido;
 
 @Stateless
 @LocalBean
@@ -24,5 +27,9 @@ public class ListasEJB {
 	public void addContenido(String precioObjetivo, Integer idLista, Integer idProducto) throws NumberFormatException {
 		Double costeObjetivo = Double.parseDouble(precioObjetivo);
 		ListaDAO.addContenido(costeObjetivo, idLista, idProducto);
+	}
+
+	public ArrayList<Contenido> getContenidosPorIdProducto(Integer id) {
+		return ListaDAO.getContenidosPorIdProducto(id);
 	}
 }

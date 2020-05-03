@@ -6,8 +6,11 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import aplicacion.modelo.LogSingleton;
+import aplicacion.modelo.dao.PrecioDAO;
 import aplicacion.modelo.dao.ProductoDAO;
+import aplicacion.modelo.pojo.CaracteristicasDeProducto;
 import aplicacion.modelo.pojo.Producto;
+import aplicacion.modelo.pojo.ProductoScraped;
 import aplicacion.modelo.pojo.ProductoSinPrecio;
 import aplicacion.modelo.pojo.Usuario;
 
@@ -68,6 +71,22 @@ public class ProductosEJB {
 			log.getLoggerProductosEJB().error("Se ha producido un error en ProductosEJB: ", e);
 		}
 		ProductoDAO.eliminarProductoDeLaLista(contenidoId, idUsuario);
+	}
+
+	public int getNumeroDeProductosEnAlgunaLista() {
+		return ProductoDAO.getNumeroDeProductosEnAlgunaLista();
+	}
+
+	public CaracteristicasDeProducto getCaracteristicasDelProductoNumero(int i) {
+		return ProductoDAO.getCaracteristicasDelProductoNumero(i);
+	}
+
+	public void updateCaracteristicasDeProducto(CaracteristicasDeProducto producto) {
+		ProductoDAO.updateCaracteristicasDeProducto(producto);
+	}
+
+	public void insertPrecio(Integer id, ProductoScraped productoScraped) {
+		PrecioDAO.insertPrecio(id, productoScraped.getPrecio());
 	}
 
 }

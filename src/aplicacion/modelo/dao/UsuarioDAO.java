@@ -75,4 +75,14 @@ public class UsuarioDAO {
 			sqlSession.close();
 		}
 	}
+
+	public static Usuario getUsuarioPorIdLista(Integer idLista) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			UsuariosMapper usuariosMapper = sqlSession.getMapper(UsuariosMapper.class);
+			return usuariosMapper.getUsuarioPorIdLista(idLista);
+		} finally {
+			sqlSession.close();
+		}
+	}
 }

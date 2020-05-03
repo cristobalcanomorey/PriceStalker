@@ -31,4 +31,8 @@ public class UsuariosEJB {
 		UsuarioDAO.eliminarUsuario(usuario.getId());
 	}
 
+	public Usuario getUsuarioPorIdLista(Integer idLista) {
+		return UsuarioDAO.getUsuarioPorIdLista(idLista);
+	}
+
 }

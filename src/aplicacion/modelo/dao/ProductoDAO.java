@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.session.SqlSession;
 
 import aplicacion.modelo.dao.mappers.ProductosMapper;
+import aplicacion.modelo.pojo.CaracteristicasDeProducto;
 import aplicacion.modelo.pojo.Producto;
 import aplicacion.modelo.pojo.ProductoSinPrecio;
 
@@ -91,6 +92,39 @@ public class ProductoDAO {
 				usuariosMapper.eliminarProductoDeLaLista(contenidoId, idUsuario);
 				sqlSession.commit();
 			}
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public static int getNumeroDeProductosEnAlgunaLista() {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			ProductosMapper productosMapper = sqlSession.getMapper(ProductosMapper.class);
+			return productosMapper.getNumeroDeProductosEnAlgunaLista();
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public static CaracteristicasDeProducto getCaracteristicasDelProductoNumero(int i) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			ProductosMapper productosMapper = sqlSession.getMapper(ProductosMapper.class);
+			return productosMapper.getCaracteristicasDelProductoNumero(i);
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public static void updateCaracteristicasDeProducto(CaracteristicasDeProducto producto) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			ProductosMapper usuariosMapper = sqlSession.getMapper(ProductosMapper.class);
+			usuariosMapper.updateCaracteristicasDeProducto(producto.getId(), producto.getNombre(),
+					producto.getImgLink());
+			sqlSession.commit();
+
 		} finally {
 			sqlSession.close();
 		}

@@ -1,8 +1,11 @@
 package aplicacion.modelo.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 
 import aplicacion.modelo.dao.mappers.ListasMapper;
+import aplicacion.modelo.pojo.Contenido;
 
 public class ListaDAO {
 
@@ -50,6 +53,16 @@ public class ListaDAO {
 		try {
 			ListasMapper productosMapper = sqlSession.getMapper(ListasMapper.class);
 			return productosMapper.getNombreLista(id);
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public static ArrayList<Contenido> getContenidosPorIdProducto(Integer id) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			ListasMapper productosMapper = sqlSession.getMapper(ListasMapper.class);
+			return productosMapper.getContenidosPorIdProducto(id);
 		} finally {
 			sqlSession.close();
 		}

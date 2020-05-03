@@ -20,4 +20,16 @@ public class PrecioDAO {
 
 	}
 
+	public static void insertPrecio(Integer id, Double precio) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			PreciosMapper preciosMapper = sqlSession.getMapper(PreciosMapper.class);
+			preciosMapper.insertPrecio(id, precio);
+			sqlSession.commit();
+
+		} finally {
+			sqlSession.close();
+		}
+	}
+
 }
