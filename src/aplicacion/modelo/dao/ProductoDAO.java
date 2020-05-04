@@ -45,8 +45,8 @@ public class ProductoDAO {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			if (nombre != null & enlace != null & imgLink != null) {
-				ProductosMapper usuariosMapper = sqlSession.getMapper(ProductosMapper.class);
-				usuariosMapper.insertProducto(nombre, enlace, imgLink);
+				ProductosMapper productosMapper = sqlSession.getMapper(ProductosMapper.class);
+				productosMapper.insertProducto(nombre, enlace, imgLink);
 				sqlSession.commit();
 			}
 		} finally {
@@ -88,8 +88,8 @@ public class ProductoDAO {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			if (contenidoId > 0) {
-				ProductosMapper usuariosMapper = sqlSession.getMapper(ProductosMapper.class);
-				usuariosMapper.eliminarProductoDeLaLista(contenidoId, idUsuario);
+				ProductosMapper productosMapper = sqlSession.getMapper(ProductosMapper.class);
+				productosMapper.eliminarProductoDeLaLista(contenidoId, idUsuario);
 				sqlSession.commit();
 			}
 		} finally {
@@ -120,8 +120,8 @@ public class ProductoDAO {
 	public static void updateCaracteristicasDeProducto(CaracteristicasDeProducto producto) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
-			ProductosMapper usuariosMapper = sqlSession.getMapper(ProductosMapper.class);
-			usuariosMapper.updateCaracteristicasDeProducto(producto.getId(), producto.getNombre(),
+			ProductosMapper productosMapper = sqlSession.getMapper(ProductosMapper.class);
+			productosMapper.updateCaracteristicasDeProducto(producto.getId(), producto.getNombre(),
 					producto.getImgLink());
 			sqlSession.commit();
 

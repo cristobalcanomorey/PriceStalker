@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+import aplicacion.modelo.pojo.CaracteristicasDeProducto;
 import aplicacion.modelo.pojo.Producto;
 import aplicacion.modelo.pojo.ProductoSinPrecio;
 
@@ -25,5 +26,12 @@ public interface ProductosMapper {
 	public ProductoSinPrecio getProductoAEliminar(@Param("contenidoId") int contenidoId);
 
 	public void eliminarProductoDeLaLista(@Param("contenidoId") int contenidoId, @Param("idUsuario") Integer idUsuario);
+
+	public int getNumeroDeProductosEnAlgunaLista();
+
+	public CaracteristicasDeProducto getCaracteristicasDelProductoNumero(@Param("i") int i);
+
+	public void updateCaracteristicasDeProducto(@Param("id") Integer id, @Param("nombre") String nombre,
+			@Param("imgLink") String imgLink);
 
 }

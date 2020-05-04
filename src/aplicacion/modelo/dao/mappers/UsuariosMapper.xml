@@ -19,6 +19,11 @@
 		SELECT * FROM usuario WHERE correo = #{correo}
 	</select>
 	
+	<select id="getUsuarioPorIdLista">
+	select * from usuario
+where id = (select idUsuario from lista where id = #{idLista});
+	</select>
+	
 	<insert id='registrarUsuario' useGeneratedKeys='true' keyProperty='id'>
 		INSERT INTO usuario (nombre,correo,password)
 		VALUES(#{nombre},#{correo},PASSWORD(#{password}))

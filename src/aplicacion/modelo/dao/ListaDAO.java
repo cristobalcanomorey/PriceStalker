@@ -51,8 +51,8 @@ public class ListaDAO {
 	public static String getNombreLista(Integer id) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
-			ListasMapper productosMapper = sqlSession.getMapper(ListasMapper.class);
-			return productosMapper.getNombreLista(id);
+			ListasMapper listasMapper = sqlSession.getMapper(ListasMapper.class);
+			return listasMapper.getNombreLista(id);
 		} finally {
 			sqlSession.close();
 		}
@@ -61,8 +61,8 @@ public class ListaDAO {
 	public static ArrayList<Contenido> getContenidosPorIdProducto(Integer id) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
-			ListasMapper productosMapper = sqlSession.getMapper(ListasMapper.class);
-			return productosMapper.getContenidosPorIdProducto(id);
+			ListasMapper listasMapper = sqlSession.getMapper(ListasMapper.class);
+			return listasMapper.getContenidosPorIdProducto(id);
 		} finally {
 			sqlSession.close();
 		}

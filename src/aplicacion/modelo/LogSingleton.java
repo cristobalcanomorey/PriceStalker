@@ -16,6 +16,7 @@ import aplicacion.controlador.Registro;
 import aplicacion.modelo.dao.MyBatisUtil;
 import aplicacion.modelo.ejb.GraficasEJB;
 import aplicacion.modelo.ejb.ProductosEJB;
+import aplicacion.modelo.ejb.ScraperEJB;
 
 public class LogSingleton {
 	private static final LogSingleton INSTANCE = new LogSingleton();
@@ -31,6 +32,7 @@ public class LogSingleton {
 	private Logger loggerEliminar = LoggerFactory.getLogger(Eliminar.class);
 	private Logger loggerAddProducto = LoggerFactory.getLogger(AddProducto.class);
 	private Logger loggerDelUser = LoggerFactory.getLogger(DelUser.class);
+	private Logger loggerScraperEJB = LoggerFactory.getLogger(ScraperEJB.class);
 	private Logger loggerMyBatisUtil = LoggerFactory.getLogger(MyBatisUtil.class);
 
 	/**
@@ -143,6 +145,10 @@ public class LogSingleton {
 
 	public Logger getLoggerEliminar() {
 		return loggerEliminar;
+	}
+
+	public Logger getLoggerScraperEJB() {
+		return loggerScraperEJB;
 	}
 
 }

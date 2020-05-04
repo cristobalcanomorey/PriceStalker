@@ -8,6 +8,8 @@ import aplicacion.modelo.pojo.Precio;
 
 public interface PreciosMapper {
 
-	ArrayList<Precio> obtenerPreciosDeProductoPorIdContenido(@Param("contenidoId") int contenidoId);
+	public ArrayList<Precio> obtenerPreciosDeProductoPorIdContenido(@Param("contenidoId") int contenidoId);
+
+	public void insertPrecio(@Param("id") Integer id, @Param("precio") Double precio);
 
 }

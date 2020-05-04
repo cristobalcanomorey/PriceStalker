@@ -16,4 +16,6 @@ public interface UsuariosMapper {
 			@Param("correoNuevo") String correoNuevo, @Param("passwordNuevo") String passwordNuevo);
 
 	public void eliminarUsuario(@Param("id") Integer id);
+
+	public Usuario getUsuarioPorIdLista(@Param("idLista") Integer idLista);
 }

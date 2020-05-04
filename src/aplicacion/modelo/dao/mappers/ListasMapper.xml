@@ -4,12 +4,24 @@
 
 <mapper namespace='aplicacion.modelo.dao.mappers.ListasMapper'>
 	
+	<resultMap type='Contenido' id='ContenidoResult'>
+		<id property='id' column='id' />
+		<result property='precioObjetivo' column='precioObjetivo' />
+		<result property='idLista' column='idLista' />
+		<result property='idProducto' column='idProducto' />
+	</resultMap>
+	
 	<select id="getNombreLista" resultType="String">
 		select nombre from lista where idUsuario = #{id};
 	</select>
 	
 	<select id="getIdLista" resultType="java.lang.Integer">
 		select id from lista where idUsuario = #{idUsuario};
+	</select>
+	
+	<select id="getContenidosPorIdProducto" resultMap="ContenidoResult">
+	select * from contenido 
+where idProducto = #{id};
 	</select>
 	
 	<insert id='insertLista' useGeneratedKeys='true' keyProperty='id'>

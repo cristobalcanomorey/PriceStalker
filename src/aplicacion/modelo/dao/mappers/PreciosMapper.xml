@@ -16,5 +16,10 @@
 where idProducto = (select idProducto from contenido
 where id=#{contenidoId});
 	</select>
+	
+	<insert id="insertPrecio" useGeneratedKeys='true' keyProperty='id'>
+	INSERT INTO precio (coste,fecha,idProducto)
+VALUES (#{precio},NOW(),#{id});
+	</insert>
 			
 </mapper>
