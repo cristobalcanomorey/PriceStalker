@@ -77,16 +77,24 @@ public class ProductosEJB {
 		return ProductoDAO.getNumeroDeProductosEnAlgunaLista();
 	}
 
-	public CaracteristicasDeProducto getCaracteristicasDelProductoNumero(int i) {
-		return ProductoDAO.getCaracteristicasDelProductoNumero(i);
-	}
-
 	public void updateCaracteristicasDeProducto(CaracteristicasDeProducto producto) {
 		ProductoDAO.updateCaracteristicasDeProducto(producto);
 	}
 
 	public void insertPrecio(Integer id, ProductoScraped productoScraped) {
 		PrecioDAO.insertPrecio(id, productoScraped.getPrecio());
+	}
+
+	public ArrayList<CaracteristicasDeProducto> getCaracteristicasDeProductos() {
+		return ProductoDAO.getCaracteristicasDeProductos();
+	}
+
+	public void marcarComoDefectuoso(CaracteristicasDeProducto caracteristicasDeProducto) {
+		ProductoDAO.marcarComoDefectuoso(caracteristicasDeProducto);
+	}
+
+	public void eliminarDefectuosos() {
+		ProductoDAO.eliminarDefectuosos();
 	}
 
 }

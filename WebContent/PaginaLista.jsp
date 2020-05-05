@@ -48,9 +48,13 @@
 				<%
 				if(!productosSinPrecio.isEmpty()){
 					for(ProductoSinPrecio productoSinPrecio : productosSinPrecio){
+						String enlace = productoSinPrecio.getLink();
+						if(enlace.equals("ProductoNotFound")){
+							enlace += "?idContenido="+productoSinPrecio.getId();
+						}
 						%>
 							<tr>
-								<td><a href="<%=productoSinPrecio.getLink()%>"><%=productoSinPrecio.getNombre()%></a></td>
+								<td><a href="<%=enlace%>"><%=productoSinPrecio.getNombre()%></a></td>
 								<td>Hasta que se escanee el producto se desconoce el precio actual</td>
 								<td><%=productoSinPrecio.getPrecioObjetivo()%> €</td>
 								<td><img alt="<%=productoSinPrecio.getNombre()%>" src="<%=productoSinPrecio.getImgLink()%>"></td>

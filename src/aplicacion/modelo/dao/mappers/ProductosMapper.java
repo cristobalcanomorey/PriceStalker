@@ -29,9 +29,14 @@ public interface ProductosMapper {
 
 	public int getNumeroDeProductosEnAlgunaLista();
 
-	public CaracteristicasDeProducto getCaracteristicasDelProductoNumero(@Param("i") int i);
-
 	public void updateCaracteristicasDeProducto(@Param("id") Integer id, @Param("nombre") String nombre,
 			@Param("imgLink") String imgLink);
+
+	public ArrayList<CaracteristicasDeProducto> getCaracteristicasDeProductos();
+
+	public void marcarComoDefectuoso(@Param("id") Integer id, @Param("nombre") String nombre,
+			@Param("enlace") String enlace, @Param("imgLink") String imgLink);
+
+	public void eliminarDefectuosos();
 
 }

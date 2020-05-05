@@ -1,6 +1,5 @@
 package aplicacion.modelo.ejb;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import javax.ejb.EJB;
@@ -35,43 +34,47 @@ public class TimerPriceStalkerEJB {
 	@EJB
 	MailEJB mailEJB;
 
-	private int i = 0;
 	private int numeroDeProductos = 0;
 
 	@SuppressWarnings("unused")
-	@Schedule(second = "0", minute = "*/5", hour = "12", dayOfWeek = "*", dayOfMonth = "*", month = "*", year = "*", info = "MyTimer")
+	@Schedule(second = "0", minute = "0", hour = "12,13", dayOfWeek = "*", dayOfMonth = "*", month = "*", year = "*", info = "MyTimer")
 	private void scheduledTimeout(final Timer t) {
 
 		numeroDeProductos = productosEJB.getNumeroDeProductosEnAlgunaLista();
+		if (numeroDeProductos > 3600) {
+			productosEJB.eliminarDefectuosos();
+			numeroDeProductos = productosEJB.getNumeroDeProductosEnAlgunaLista();
+		}
+		if (numeroDeProductos > 0 && numeroDeProductos <= 3600) {
+			int s = 3600 / numeroDeProductos;
+			ArrayList<CaracteristicasDeProducto> productos = productosEJB.getCaracteristicasDeProductos();
 
-		if (i < numeroDeProductos) {
-			CaracteristicasDeProducto producto = productosEJB.getCaracteristicasDelProductoNumero(i);
+			if (productos != null) {
+				for (CaracteristicasDeProducto caracteristicasDeProducto : productos) {
+					ArrayList<Contenido> contenidos = listasEJB
+							.getContenidosPorIdProducto(caracteristicasDeProducto.getId());
 
-			if (producto != null) {
-				ArrayList<Contenido> contenidos = listasEJB.getContenidosPorIdProducto(producto.getId());
-				ProductoScraped productoScraped = scraperEJB.scrapeLink(producto.getLink());
+					ProductoScraped productoScraped = scraperEJB.scrapeLink(caracteristicasDeProducto.getLink(), s);
 
-				producto.setNombre(productoScraped.getNombre());
-				producto.setImgLink(productoScraped.getImgLink());
+					if (productoScraped != null) {
+						caracteristicasDeProducto.setNombre(productoScraped.getNombre());
+						caracteristicasDeProducto.setImgLink(productoScraped.getImgLink());
 
-				productosEJB.updateCaracteristicasDeProducto(producto);
-				productosEJB.insertPrecio(producto.getId(), productoScraped);
+						productosEJB.updateCaracteristicasDeProducto(caracteristicasDeProducto);
+						productosEJB.insertPrecio(caracteristicasDeProducto.getId(), productoScraped);
 
-				for (Contenido contenido : contenidos) {
-					if (contenido.getPrecioObjetivo().compareTo(productoScraped.getPrecio()) <= 0) {
-						Usuario usuario = usuariosEJB.getUsuarioPorIdLista(contenido.getIdLista());
-						mailEJB.enviarCorreo(usuario, contenido, productoScraped);
+						for (Contenido contenido : contenidos) {
+							if (contenido.getPrecioObjetivo().compareTo(productoScraped.getPrecio()) <= 0) {
+								Usuario usuario = usuariosEJB.getUsuarioPorIdLista(contenido.getIdLista());
+								mailEJB.enviarCorreoBajadaDePrecio(usuario, contenido, productoScraped,
+										caracteristicasDeProducto.getLink());
+							}
+						}
+					} else {
+						productosEJB.marcarComoDefectuoso(caracteristicasDeProducto);
 					}
 				}
-
 			}
 		}
-
-		if (LocalDateTime.now().getMinute() == 55) {
-			i = 0;
-		} else {
-			i++;
-		}
-
 	}
 }

@@ -21,6 +21,13 @@
 		<result property='precioObjetivo' column='precioObjetivo' />
 		<result property='imgLink' column='imgLink' />
 	</resultMap>
+	
+	<resultMap type='CaracteristicasDeProducto' id='CaracteristicasDeProductoResult'>
+		<id property='id' column='id' />
+		<result property='nombre' column='nombre' />
+		<result property='link' column='link' />
+		<result property='imgLink' column='imgLink' />
+	</resultMap>
 
 	<select id='getProductosPorUserId' resultMap='ProductosResult'>
 	SELECT contenido.id,producto.nombre,producto.link,contenido.precioObjetivo,producto.imgLink,o.coste,o.fecha
@@ -73,14 +80,18 @@ where id = (select idProducto from contenido where id = #{contenidoId});
 where id in (select distinct idProducto from contenido order by idProducto);
 	</select>
 	
-	<select id="getCaracteristicasDelProductoNumero" resultType="CaracteristicasDeProducto">
+	<select id="getCaracteristicasDeProductos" resultMap="CaracteristicasDeProductoResult">
 	select * from producto
-where id in (select distinct idProducto from contenido order by idProducto)
-limit #{i},1;
+where id in (select distinct idProducto from contenido order by idProducto);
 	</select>
-	
+		
 	<update id="updateCaracteristicasDeProducto">
 	UPDATE producto SET nombre = #{nombre}, imgLink = #{imgLink}
+WHERE id = #{id};
+	</update>
+	
+	<update id="marcarComoDefectuoso">
+	UPDATE producto SET nombre = #{nombre}, link = #{enlace} imgLink = #{imgLink}
 WHERE id = #{id};
 	</update>
 	
@@ -93,6 +104,10 @@ WHERE id = #{id};
 	delete from contenido
 where idLista = (select id from lista where idUsuario = #{idUsuario}) AND
 id = #{contenidoId};
+	</delete>
+	
+	<delete id="eliminarDefectuosos">
+	delete from producto where nombre = 'El enlace de este producto no funciona.';
 	</delete>
 				
 </mapper>

@@ -107,22 +107,48 @@ public class ProductoDAO {
 		}
 	}
 
-	public static CaracteristicasDeProducto getCaracteristicasDelProductoNumero(int i) {
-		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
-		try {
-			ProductosMapper productosMapper = sqlSession.getMapper(ProductosMapper.class);
-			return productosMapper.getCaracteristicasDelProductoNumero(i);
-		} finally {
-			sqlSession.close();
-		}
-	}
-
 	public static void updateCaracteristicasDeProducto(CaracteristicasDeProducto producto) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			ProductosMapper productosMapper = sqlSession.getMapper(ProductosMapper.class);
 			productosMapper.updateCaracteristicasDeProducto(producto.getId(), producto.getNombre(),
 					producto.getImgLink());
+			sqlSession.commit();
+
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public static ArrayList<CaracteristicasDeProducto> getCaracteristicasDeProductos() {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			ProductosMapper productosMapper = sqlSession.getMapper(ProductosMapper.class);
+			return productosMapper.getCaracteristicasDeProductos();
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public static void marcarComoDefectuoso(CaracteristicasDeProducto caracteristicasDeProducto) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			ProductosMapper productosMapper = sqlSession.getMapper(ProductosMapper.class);
+			productosMapper.marcarComoDefectuoso(caracteristicasDeProducto.getId(),
+					"El enlace de este producto no funciona.", "ProductoNotFound", "imgs/ImgNotFound.png");
+			sqlSession.commit();
+
+		} finally {
+			sqlSession.close();
+		}
+	}
+
+	public static void eliminarDefectuosos() {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+
+			ProductosMapper productosMapper = sqlSession.getMapper(ProductosMapper.class);
+			productosMapper.eliminarDefectuosos();
 			sqlSession.commit();
 
 		} finally {
