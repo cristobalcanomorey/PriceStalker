@@ -114,7 +114,6 @@ public class ProductoDAO {
 			productosMapper.updateCaracteristicasDeProducto(producto.getId(), producto.getNombre(),
 					producto.getImgLink());
 			sqlSession.commit();
-
 		} finally {
 			sqlSession.close();
 		}
@@ -137,7 +136,6 @@ public class ProductoDAO {
 			productosMapper.marcarComoDefectuoso(caracteristicasDeProducto.getId(),
 					"El enlace de este producto no funciona.", "ProductoNotFound", "imgs/ImgNotFound.png");
 			sqlSession.commit();
-
 		} finally {
 			sqlSession.close();
 		}
@@ -150,7 +148,6 @@ public class ProductoDAO {
 			ProductosMapper productosMapper = sqlSession.getMapper(ProductosMapper.class);
 			productosMapper.eliminarDefectuosos();
 			sqlSession.commit();
-
 		} finally {
 			sqlSession.close();
 		}

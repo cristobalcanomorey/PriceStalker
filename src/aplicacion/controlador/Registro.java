@@ -58,10 +58,10 @@ public class Registro extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		LogSingleton log = LogSingleton.getInstance();
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
+		String nombre = request.getParameter("nombre");
+		String correo = request.getParameter("correo");
 		String error = null;
 		if (usuario == null) {
-			String nombre = request.getParameter("nombre");
-			String correo = request.getParameter("correo");
 			String password = request.getParameter("password");
 			String confirmaPassword = request.getParameter("confirmaPassword");
 			if (nombre != null & correo != null & password != null & confirmaPassword != null) {
@@ -88,6 +88,8 @@ public class Registro extends HttpServlet {
 			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaRegistro.jsp");
 
 			request.setAttribute("error", error);
+			request.setAttribute("nombre", nombre);
+			request.setAttribute("correo", correo);
 
 			try {
 				rs.forward(request, response);

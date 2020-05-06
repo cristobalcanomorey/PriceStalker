@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import aplicacion.modelo.LogSingleton;
+import aplicacion.modelo.ejb.ListasEJB;
 import aplicacion.modelo.ejb.ProductosEJB;
 import aplicacion.modelo.ejb.SesionesEJB;
 import aplicacion.modelo.pojo.Usuario;
@@ -26,6 +27,9 @@ public class Lista extends HttpServlet {
 	@EJB
 	ProductosEJB productosEJB;
 
+	@EJB
+	ListasEJB listasEJB;
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -35,6 +39,7 @@ public class Lista extends HttpServlet {
 		if (usuario != null) {
 			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaLista.jsp");
 			request.setAttribute("usuario", usuario);
+			request.setAttribute("nombreLista", listasEJB.getNombreLista(usuario.getId()));
 			request.setAttribute("productos", productosEJB.productosPorUserId(usuario));
 			request.setAttribute("productosSinPrecio", productosEJB.productosSinPrecioPorUserId(usuario));
 			try {

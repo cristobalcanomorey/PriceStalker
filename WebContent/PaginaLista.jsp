@@ -7,6 +7,7 @@
 <%!ArrayList<Producto> productos; %>
 <%!ArrayList<ProductoSinPrecio> productosSinPrecio; %>
 <%!Usuario usuario = null; %>
+<%!String nombreLista = null; %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +19,11 @@
 		productos = (ArrayList<Producto>) request.getAttribute("productos");
 		productosSinPrecio = (ArrayList<ProductoSinPrecio>) request.getAttribute("productosSinPrecio");
 		usuario = (Usuario) request.getAttribute("usuario");
+		nombreLista = (String) request.getAttribute("nombreLista");
+		String opcionAddProducto = "Añadir producto a la lista";
+		if(nombreLista == null){
+			opcionAddProducto = "Crear lista de productos";
+		}
 	%>
 	<ul>
 		<li><a href="Principal">Price Stalker</a></li>
@@ -25,7 +31,7 @@
 			if(usuario != null){
 		%>
 		<li><%=usuario.getNombre() %></li>
-		<li><a href="AddProducto">Añadir producto a lista</a></li>
+		<li><a href="AddProducto"><%=opcionAddProducto %></a></li>
 		<li><a href="Logout">Cerrar sesión</a></li>
 		<li><a href="AdminUser">Administrar usuario</a></li>
 		<%} %>
@@ -36,6 +42,7 @@
 			if(!productos.isEmpty() | !productosSinPrecio.isEmpty()){
 				
 				%>
+				<h3><%=nombreLista %></h3>
 				<table>
 					<tr>
 						<th>Nombre</th>
@@ -55,9 +62,9 @@
 						%>
 							<tr>
 								<td><a href="<%=enlace%>"><%=productoSinPrecio.getNombre()%></a></td>
-								<td>Hasta que se escanee el producto se desconoce el precio actual</td>
-								<td><%=productoSinPrecio.getPrecioObjetivo()%> €</td>
-								<td><img alt="<%=productoSinPrecio.getNombre()%>" src="<%=productoSinPrecio.getImgLink()%>"></td>
+								<td>Hasta que escaneemos el producto desconocemos el precio actual</td>
+								<td><%=String.format("%.2f",productoSinPrecio.getPrecioObjetivo())%> €</td>
+								<td><img alt="No se ha podido cargar la imágen" src="<%=productoSinPrecio.getImgLink()%>"></td>
 								<td><a href="Grafica?producto=<%=productoSinPrecio.getId()%>">Gráfica</a></td>
 								<td><a href="Eliminar?producto=<%=productoSinPrecio.getId()%>">Eliminar producto</a></td>
 							</tr>
@@ -69,9 +76,9 @@
 						%>
 							<tr>
 								<td><a href="<%=producto.getLink()%>"><%=producto.getNombre()%></a></td>
-								<td><%=producto.getCoste()%> €</td>
-								<td><%=producto.getPrecioObjetivo()%> €</td>
-								<td><img alt="<%=producto.getNombre()%>" src="<%=producto.getImgLink()%>"></td>
+								<td><%=String.format("%.2f",producto.getCoste())%> €</td>
+								<td><%=String.format("%.2f",producto.getPrecioObjetivo())%> €</td>
+								<td><img alt="No se ha podido cargar la imágen" src="<%=producto.getImgLink()%>"></td>
 								<td><a href="Grafica?producto=<%=producto.getId()%>">Gráfica</a></td>
 								<td><a href="Eliminar?producto=<%=producto.getId()%>">Eliminar producto</a></td>
 							</tr>
@@ -81,7 +88,10 @@
 				%>
 				</table>
 				<%
-			}
+			} else{%>
+				<h3>No tienes ninguna lista de productos</h3>
+				<a href="AddProducto">Crear lista de productos</a>
+			<%}
 		}
 	%>
 </body>

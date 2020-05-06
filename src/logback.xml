@@ -29,10 +29,57 @@
   <logger name="aplicacion.controlador.Login" level="ERROR" additivity="false">
     <appender-ref ref="ERRORFILE" />
   </logger>
+  <logger name="aplicacion.controlador.Logout" level="ERROR" additivity="false">
+    <appender-ref ref="ERRORFILE" />
+  </logger>
   <logger name="aplicacion.controlador.Registro" level="ERROR" additivity="false">
     <appender-ref ref="ERRORFILE" />
   </logger>
- 
+  <logger name="aplicacion.controlador.AddProducto" level="ERROR" additivity="false">
+    <appender-ref ref="ERRORFILE" />
+  </logger>
+  <logger name="aplicacion.controlador.AdminUser" level="ERROR" additivity="false">
+    <appender-ref ref="ERRORFILE" />
+  </logger>
+  <logger name="aplicacion.controlador.DelUser" level="ERROR" additivity="false">
+    <appender-ref ref="ERRORFILE" />
+  </logger>
+  <logger name="aplicacion.controlador.Eliminar" level="ERROR" additivity="false">
+    <appender-ref ref="ERRORFILE" />
+  </logger>
+  <logger name="aplicacion.controlador.Grafica" level="ERROR" additivity="false">
+    <appender-ref ref="ERRORFILE" />
+  </logger>
+ <logger name="aplicacion.controlador.Lista" level="ERROR" additivity="false">
+    <appender-ref ref="ERRORFILE" />
+  </logger>
+  <logger name="aplicacion.controlador.AddProducto" level="ERROR" additivity="false">
+    <appender-ref ref="ERRORFILE" />
+  </logger>
+  <logger name="aplicacion.controlador.ProductoNotFound" level="ERROR" additivity="false">
+    <appender-ref ref="ERRORFILE" />
+  </logger>
+  
+  <logger name="aplicacion.modelo.dao.MyBatisUtil" level="ERROR" additivity="false">
+    <appender-ref ref="ERRORFILE" />
+  </logger>
+  
+  <logger name="aplicacion.modelo.ejb.GraficasEJB" level="ERROR" additivity="false">
+    <appender-ref ref="ERRORFILE" />
+  </logger>
+  <logger name="aplicacion.modelo.ejb.GraficasEJB" level="ERROR" additivity="false">
+    <appender-ref ref="ERRORFILE" />
+  </logger>
+  <logger name="aplicacion.modelo.ejb.MailEJB" level="ERROR" additivity="false">
+    <appender-ref ref="ERRORFILE" />
+  </logger>
+  <logger name="aplicacion.modelo.ejb.ProductosEJB" level="ERROR" additivity="false">
+    <appender-ref ref="ERRORFILE" />
+  </logger>
+  <logger name="aplicacion.modelo.ejb.ScraperEJB" level="ERROR" additivity="false">
+    <appender-ref ref="ERRORFILE" />
+  </logger>
+  
   <root level="DEBUG">
     <appender-ref ref="DEBUGFILE" />
   </root>

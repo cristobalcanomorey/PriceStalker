@@ -19,7 +19,7 @@
 		SELECT * FROM usuario WHERE correo = #{correo}
 	</select>
 	
-	<select id="getUsuarioPorIdLista">
+	<select id="getUsuarioPorIdLista" resultType='Usuario'>
 	select * from usuario
 where id = (select idUsuario from lista where id = #{idLista});
 	</select>

@@ -37,7 +37,7 @@ public class TimerPriceStalkerEJB {
 	private int numeroDeProductos = 0;
 
 	@SuppressWarnings("unused")
-	@Schedule(second = "0", minute = "0", hour = "12,13", dayOfWeek = "*", dayOfMonth = "*", month = "*", year = "*", info = "MyTimer")
+	@Schedule(second = "0", minute = "10", hour = "16", dayOfWeek = "*", dayOfMonth = "*", month = "*", year = "*", info = "MyTimer")
 	private void scheduledTimeout(final Timer t) {
 
 		numeroDeProductos = productosEJB.getNumeroDeProductosEnAlgunaLista();
@@ -46,7 +46,7 @@ public class TimerPriceStalkerEJB {
 			numeroDeProductos = productosEJB.getNumeroDeProductosEnAlgunaLista();
 		}
 		if (numeroDeProductos > 0 && numeroDeProductos <= 3600) {
-			int s = 3600 / numeroDeProductos;
+			int ms = (3600 / numeroDeProductos) * 1000;
 			ArrayList<CaracteristicasDeProducto> productos = productosEJB.getCaracteristicasDeProductos();
 
 			if (productos != null) {
@@ -54,7 +54,10 @@ public class TimerPriceStalkerEJB {
 					ArrayList<Contenido> contenidos = listasEJB
 							.getContenidosPorIdProducto(caracteristicasDeProducto.getId());
 
-					ProductoScraped productoScraped = scraperEJB.scrapeLink(caracteristicasDeProducto.getLink(), s);
+					if (caracteristicasDeProducto.getId().equals(6)) {
+						String a = "";
+					}
+					ProductoScraped productoScraped = scraperEJB.scrapeLink(caracteristicasDeProducto.getLink(), ms);
 
 					if (productoScraped != null) {
 						caracteristicasDeProducto.setNombre(productoScraped.getNombre());
@@ -64,7 +67,7 @@ public class TimerPriceStalkerEJB {
 						productosEJB.insertPrecio(caracteristicasDeProducto.getId(), productoScraped);
 
 						for (Contenido contenido : contenidos) {
-							if (contenido.getPrecioObjetivo().compareTo(productoScraped.getPrecio()) <= 0) {
+							if (productoScraped.getPrecio().compareTo(contenido.getPrecioObjetivo()) <= 0) {
 								Usuario usuario = usuariosEJB.getUsuarioPorIdLista(contenido.getIdLista());
 								mailEJB.enviarCorreoBajadaDePrecio(usuario, contenido, productoScraped,
 										caracteristicasDeProducto.getLink());
