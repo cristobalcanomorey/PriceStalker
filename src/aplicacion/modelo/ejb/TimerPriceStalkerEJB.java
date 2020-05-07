@@ -37,7 +37,7 @@ public class TimerPriceStalkerEJB {
 	private int numeroDeProductos = 0;
 
 	@SuppressWarnings("unused")
-	@Schedule(second = "0", minute = "10", hour = "16", dayOfWeek = "*", dayOfMonth = "*", month = "*", year = "*", info = "MyTimer")
+	@Schedule(second = "0", minute = "23", hour = "14", dayOfWeek = "*", dayOfMonth = "*", month = "*", year = "*", info = "MyTimer")
 	private void scheduledTimeout(final Timer t) {
 
 		numeroDeProductos = productosEJB.getNumeroDeProductosEnAlgunaLista();
@@ -54,9 +54,10 @@ public class TimerPriceStalkerEJB {
 					ArrayList<Contenido> contenidos = listasEJB
 							.getContenidosPorIdProducto(caracteristicasDeProducto.getId());
 
-					if (caracteristicasDeProducto.getId().equals(6)) {
-						String a = "";
+					if (ms > 30000) {
+						ms = 30000;
 					}
+
 					ProductoScraped productoScraped = scraperEJB.scrapeLink(caracteristicasDeProducto.getLink(), ms);
 
 					if (productoScraped != null) {
@@ -65,12 +66,13 @@ public class TimerPriceStalkerEJB {
 
 						productosEJB.updateCaracteristicasDeProducto(caracteristicasDeProducto);
 						productosEJB.insertPrecio(caracteristicasDeProducto.getId(), productoScraped);
-
-						for (Contenido contenido : contenidos) {
-							if (productoScraped.getPrecio().compareTo(contenido.getPrecioObjetivo()) <= 0) {
-								Usuario usuario = usuariosEJB.getUsuarioPorIdLista(contenido.getIdLista());
-								mailEJB.enviarCorreoBajadaDePrecio(usuario, contenido, productoScraped,
-										caracteristicasDeProducto.getLink());
+						if (!productoScraped.getPrecio().equals(Double.valueOf("-1"))) {
+							for (Contenido contenido : contenidos) {
+								if (productoScraped.getPrecio().compareTo(contenido.getPrecioObjetivo()) <= 0) {
+									Usuario usuario = usuariosEJB.getUsuarioPorIdLista(contenido.getIdLista());
+									mailEJB.enviarCorreoBajadaDePrecio(usuario, contenido, productoScraped,
+											caracteristicasDeProducto.getLink());
+								}
 							}
 						}
 					} else {

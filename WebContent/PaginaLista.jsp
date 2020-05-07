@@ -62,7 +62,11 @@
 						%>
 							<tr>
 								<td><a href="<%=enlace%>"><%=productoSinPrecio.getNombre()%></a></td>
+								<%if(productoSinPrecio.getNombre().equals("El enlace de este producto no funciona.")){ %>
+								<td></td>
+								<%} else{ %>
 								<td>Hasta que escaneemos el producto desconocemos el precio actual</td>
+								<%} %>
 								<td><%=String.format("%.2f",productoSinPrecio.getPrecioObjetivo())%> €</td>
 								<td><img alt="No se ha podido cargar la imágen" src="<%=productoSinPrecio.getImgLink()%>"></td>
 								<td><a href="Grafica?producto=<%=productoSinPrecio.getId()%>">Gráfica</a></td>
@@ -76,7 +80,11 @@
 						%>
 							<tr>
 								<td><a href="<%=producto.getLink()%>"><%=producto.getNombre()%></a></td>
+								<%if(!producto.getCoste().equals(Double.valueOf("-1"))){ %>
 								<td><%=String.format("%.2f",producto.getCoste())%> €</td>
+								<%}else{ %>
+								<td>Producto no disponible</td>
+								<%} %>
 								<td><%=String.format("%.2f",producto.getPrecioObjetivo())%> €</td>
 								<td><img alt="No se ha podido cargar la imágen" src="<%=producto.getImgLink()%>"></td>
 								<td><a href="Grafica?producto=<%=producto.getId()%>">Gráfica</a></td>

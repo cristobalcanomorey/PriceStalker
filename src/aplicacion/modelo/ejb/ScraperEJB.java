@@ -51,6 +51,26 @@ public class ScraperEJB {
 		}
 	}
 
+	private ProductoScraped formarProductoScrapedDeAmazon(String titulo, String precioString) {
+		LogSingleton log = LogSingleton.getInstance();
+		if (!titulo.equals("") & !precioString.equals("")) {
+			precioString = quitarSimboloEuro(precioString);
+		} else if (!titulo.equals("")) {
+			precioString = "-1";
+		}
+		Double precio = Double.parseDouble("-1");
+		try {
+			precio = Double.parseDouble(precioString);
+		} catch (Exception e) {
+			log.getLoggerScraperEJB().error("Se ha producido un error en ScraperEJB: " + e);
+		}
+		if (!titulo.equals("") & !precioString.equals("")) {
+			return new ProductoScraped(titulo, precio, "imgs/ProductoDeAmazon.png");
+		} else {
+			return null;
+		}
+	}
+
 	private ProductoScraped obtenProductoDeAmazon(Document doc) {
 		LogSingleton log = LogSingleton.getInstance();
 		String titulo = null;
@@ -58,30 +78,25 @@ public class ScraperEJB {
 		try {
 			titulo = doc.select("#productTitle").text();
 			precioString = doc.select("#priceblock_ourprice").text();
-			if (!titulo.equals("") & !precioString.equals("")) {
-				precioString = quitarSimboloEuro(precioString);
-				return new ProductoScraped(titulo, Double.parseDouble(precioString), "imgs/ProductoDeAmazon.png");
-			}
+			return formarProductoScrapedDeAmazon(titulo, precioString);
 		} catch (NullPointerException e) {
 			log.getLoggerScraperEJB().error("Se ha producido un error en ScraperEJB: " + e);
 		}
 		try {
 			titulo = doc.select("#title").text();
 			precioString = doc.select("#olp-upd-new-freeshipping > a:nth-child(1) > span:nth-child(1)").text();
-			if (!titulo.equals("") & !precioString.equals("")) {
-				precioString = quitarSimboloEuro(precioString);
-				return new ProductoScraped(titulo, Double.parseDouble(precioString), "imgs/ProductoDeAmazon.png");
+			if (precioString.equals("")) {
+				precioString = doc.select("#outOfStock > div:nth-child(1) > div:nth-child(1) > span:nth-child(1)")
+						.text();
 			}
+			return formarProductoScrapedDeAmazon(titulo, precioString);
 		} catch (NullPointerException e) {
 			log.getLoggerScraperEJB().error("Se ha producido un error en ScraperEJB: " + e);
 		}
 		try {
 			titulo = doc.select("#title").text();
 			precioString = doc.select(".offer-price").first().text();
-			if (!titulo.equals("") & !precioString.equals("")) {
-				precioString = quitarSimboloEuro(precioString);
-				return new ProductoScraped(titulo, Double.parseDouble(precioString), "imgs/ProductoDeAmazon.png");
-			}
+			return formarProductoScrapedDeAmazon(titulo, precioString);
 		} catch (NullPointerException e) {
 			log.getLoggerScraperEJB().error("Se ha producido un error en ScraperEJB: " + e);
 		}

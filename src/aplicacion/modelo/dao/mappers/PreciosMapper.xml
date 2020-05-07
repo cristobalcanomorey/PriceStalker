@@ -14,7 +14,8 @@
 	<select id='obtenerPreciosDeProductoPorIdContenido' resultMap='PreciosResult'>
 	select * from precio
 where idProducto = (select idProducto from contenido
-where id=#{contenidoId});
+where id=#{contenidoId}) AND
+coste >= 0;
 	</select>
 	
 	<insert id="insertPrecio" useGeneratedKeys='true' keyProperty='id'>

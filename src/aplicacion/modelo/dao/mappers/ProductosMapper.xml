@@ -91,7 +91,7 @@ WHERE id = #{id};
 	</update>
 	
 	<update id="marcarComoDefectuoso">
-	UPDATE producto SET nombre = #{nombre}, link = #{enlace} imgLink = #{imgLink}
+	UPDATE producto SET nombre = #{nombre}, link = #{enlace}, imgLink = #{imgLink}
 WHERE id = #{id};
 	</update>
 	
