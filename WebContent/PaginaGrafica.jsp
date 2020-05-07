@@ -46,7 +46,11 @@
 	<div>
 		<div><img src="<%=producto.getImgLink() %>" alt="imágen del producto"></div>
 		<div>Nombre: <a href="<%= producto.getLink()%>"><%=producto.getNombre() %></a></div>
+		<%if(!producto.getCoste().equals(Double.valueOf("-1"))){ %>
 		<div>Precio actual: <%=producto.getCoste() %>€</div>
+		<%}else{ %>
+		<div>Producto no disponible</div>
+		<%} %>
 		<div>Precio objetivo: <%=producto.getPrecioObjetivo() %>€</div>
 		<div>Fecha de la última revisión: <%=fecha %></div>
 		<a href="Eliminar?producto=<%=producto.getId()%>">Eliminar este producto de tu lista</a>
