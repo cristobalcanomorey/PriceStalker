@@ -37,7 +37,7 @@ public class TimerPriceStalkerEJB {
 	private int numeroDeProductos = 0;
 
 	@SuppressWarnings("unused")
-	@Schedule(second = "0", minute = "23", hour = "14", dayOfWeek = "*", dayOfMonth = "*", month = "*", year = "*", info = "MyTimer")
+	@Schedule(second = "0", minute = "0", hour = "12", dayOfWeek = "*", dayOfMonth = "*", month = "*", year = "*", info = "MyTimer")
 	private void scheduledTimeout(final Timer t) {
 
 		numeroDeProductos = productosEJB.getNumeroDeProductosEnAlgunaLista();
