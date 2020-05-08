@@ -9,12 +9,29 @@
 <%!Usuario usuario = null; %>
 <%!String nombreLista = null; %>
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<title>Price Stalker</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>PriceStalker</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
 </head>
-<body>
+
+<body id="page-top">
+
 	<%
 		productos = (ArrayList<Producto>) request.getAttribute("productos");
 		productosSinPrecio = (ArrayList<ProductoSinPrecio>) request.getAttribute("productosSinPrecio");
@@ -25,34 +42,75 @@
 			opcionAddProducto = "Crear lista de productos";
 		}
 	%>
-	<ul>
-		<li><a href="Principal">Price Stalker</a></li>
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <div class="navvar-nav mr-auto">
+              <h2><a class="nav-link text-dark" href="Principal">PriceStalker</a></h2>
+          </div>
+
+			<%
+				if(usuario != null){
+			%>
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="AddProducto"><%=opcionAddProducto %></a>
+            </li>
+
+            <li class="topbar-divider d-none d-sm-block"></li>
+
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle text-dark" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%=usuario.getNombre() %>
+              </a>
+              <!-- Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="AdminUser">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Administrar usuario
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Cerrar sesión
+                </a>
+              </div>
+            </li>
+
+          </ul>
+          <%	} %>
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+			<!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class=" mb-0 text-gray-800">Tu lista de productos</h1>
+          </div>
 		<%
-			if(usuario != null){
-		%>
-		<li><%=usuario.getNombre() %></li>
-		<li><a href="AddProducto"><%=opcionAddProducto %></a></li>
-		<li><a href="Logout">Cerrar sesión</a></li>
-		<li><a href="AdminUser">Administrar usuario</a></li>
-		<%} %>
-	</ul>
-	<h1>Lista de productos</h1>
-	<%
 		if(productos != null | productosSinPrecio != null){
 			if(!productos.isEmpty() | !productosSinPrecio.isEmpty()){
 				
 				%>
-				<h3><%=nombreLista %></h3>
-				<table>
-					<tr>
-						<th>Nombre</th>
-						<th>Precio actual</th>
-						<th>Precio objetivo</th>
-						<th>Imágen</th>
-						<th></th>
-						<th></th>
-					</tr>
-				<%
+          <h1 class="h3 text-gray-800"><%=nombreLista %></h1>
+
+          <div class="row">
+<%
 				if(!productosSinPrecio.isEmpty()){
 					for(ProductoSinPrecio productoSinPrecio : productosSinPrecio){
 						String enlace = productoSinPrecio.getLink();
@@ -60,47 +118,161 @@
 							enlace += "?idContenido="+productoSinPrecio.getId();
 						}
 						%>
-							<tr>
-								<td><a href="<%=enlace%>"><%=productoSinPrecio.getNombre()%></a></td>
-								<%if(productoSinPrecio.getNombre().equals("El enlace de este producto no funciona.")){ %>
-								<td></td>
-								<%} else{ %>
-								<td>Hasta que escaneemos el producto desconocemos el precio actual</td>
+						
+						<div class="col-lg-4 col-md-6">
+                <!-- Dropdown Card Example -->
+              <div class="card shadow mb-4">
+                  <!-- Card Body -->
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xl-7 col-lg-12 col-sm-12">
+                                <img alt="Imágen del producto" class="mx-auto d-block w-100" src="<%=productoSinPrecio.getImgLink()%>">
+                            </div>
+                            <div class="col-xl-5 col-lg-12 col-sm-12 d-flex align-items-center text-right">
+                                <div class="mx-auto">
+                                <%if(!productoSinPrecio.getNombre().equals("El enlace de este producto no funciona.")){ %>
+                                <div class="text-dark mb-4"><h4>Hasta que escaneemos el producto desconocemos el precio actual</h4></div>
 								<%} %>
-								<td><%=String.format("%.2f",productoSinPrecio.getPrecioObjetivo())%> €</td>
-								<td><img alt="No se ha podido cargar la imágen" src="<%=productoSinPrecio.getImgLink()%>"></td>
-								<td><a href="Grafica?producto=<%=productoSinPrecio.getId()%>">Gráfica</a></td>
-								<td><a href="Eliminar?producto=<%=productoSinPrecio.getId()%>">Eliminar producto</a></td>
-							</tr>
+                                    <div class="text-dark mt-4"><h4>Precio objetivo: <span class="text-nowrap"><%=String.format("%.2f",productoSinPrecio.getPrecioObjetivo())%> €</span></h4></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary"><a href="<%=enlace%>"><%=productoSinPrecio.getNombre()%></a></h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink1">
+                      <div class="dropdown-header">Opciones:</div>
+                      <a class="dropdown-item" href="Grafica?producto=<%=productoSinPrecio.getId()%>">Historial de precios</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="Eliminar?producto=<%=productoSinPrecio.getId()%>">Eliminar de la lista</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
 						<%
 					}
 				}
 				if(!productos.isEmpty()){
 					for(Producto producto : productos){
 						%>
-							<tr>
-								<td><a href="<%=producto.getLink()%>"><%=producto.getNombre()%></a></td>
-								<%if(!producto.getCoste().equals(Double.valueOf("-1"))){ %>
-								<td><%=String.format("%.2f",producto.getCoste())%> €</td>
+						
+						<div class="col-lg-4 col-md-6">
+                <!-- Dropdown Card Example -->
+              <div class="card shadow mb-4">
+                  <!-- Card Body -->
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xl-7 col-lg-12 col-sm-12">
+                                <img alt="Imágen del producto" class="mx-auto d-block w-100" src="<%=producto.getImgLink()%>">
+                            </div>
+                            <div class="col-xl-5 col-lg-12 col-sm-12 d-flex align-items-center text-right">
+                                <div class="mx-auto">
+                                <%if(!producto.getCoste().equals(Double.valueOf("-1"))){ %>
+                                <div class="text-dark mt-4"><h4>Precio actual: <span class="text-nowrap"><%=String.format("%.2f",producto.getCoste())%> €</span></h4></div>
 								<%}else{ %>
-								<td>Producto no disponible</td>
+								<div class="text-dark mb-4"><h4>Producto no disponible</h4></div>
 								<%} %>
-								<td><%=String.format("%.2f",producto.getPrecioObjetivo())%> €</td>
-								<td><img alt="No se ha podido cargar la imágen" src="<%=producto.getImgLink()%>"></td>
-								<td><a href="Grafica?producto=<%=producto.getId()%>">Gráfica</a></td>
-								<td><a href="Eliminar?producto=<%=producto.getId()%>">Eliminar producto</a></td>
-							</tr>
+                                    <div class="text-dark mt-4"><h4>Precio objetivo: <span class="text-nowrap"><%=String.format("%.2f",producto.getPrecioObjetivo())%> €</span></h4></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary"><a href="<%=producto.getLink()%>"><%=producto.getNombre()%></a></h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink1">
+                      <div class="dropdown-header">Opciones:</div>
+                      <a class="dropdown-item" href="Grafica?producto=<%=producto.getId()%>">Historial de precios</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="Eliminar?producto=<%=producto.getId()%>">Eliminar de la lista</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
 						<%
 					}	
 				}
 				%>
-				</table>
-				<%
+          </div>
+      <!-- End of Main Content -->
+
+		<%
 			} else{%>
 				<h3>No tienes ninguna lista de productos</h3>
 				<a href="AddProducto">Crear lista de productos</a>
 			<%}
 		}
 	%>
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Your Website 2019</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">¿Quieres salir?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Selecciona "Cerrar sesión" si quieres terminar la sesión.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Mantener la sesión abierta</button>
+          <a class="btn btn-primary" href="Logout">Cerrar sesión</a>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
 </body>
+
 </html>
