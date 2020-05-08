@@ -23,8 +23,8 @@ CREATE TABLE lista (
 CREATE TABLE producto (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(200) NOT NULL,
-    link VARCHAR(510) NOT NULL UNIQUE,
-    imgLink VARCHAR(210) NOT NULL UNIQUE
+    link VARCHAR(510) NOT NULL,
+    imgLink VARCHAR(210) NOT NULL
 )ENGINE=INNODB CHARACTER SET=utf8;
 
 CREATE TABLE contenido (
@@ -64,19 +64,19 @@ INSERT INTO lista (nombre,idUsuario)
 VALUES ('PC Gaming',2);
 
 INSERT INTO producto (nombre,link,imgLink)
-VALUES ('Amazon Essentials Pantalones Hombre','https://www.amazon.es/Amazon-Essentials-Fleece-Sweatpant-Pantalones/dp/B075JNJB9B/ref=sr_1_2_sspa?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=pants&qid=1584725687&sr=8-2-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUFOSEE4TFZMM0tYVEsmZW5jcnlwdGVkSWQ9QTA4NDE0MTZZSVMyRUdZR09DSkQmZW5jcnlwdGVkQWRJZD1BMDA1MzE3Nk8yTzZHMzJKTldZRCZ3aWRnZXROYW1lPXNwX2F0ZiZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU=','https://images-na.ssl-images-amazon.com/images/I/71YTPz3bZqL._AC_UY879_.jpg');
+VALUES ('Amazon Essentials Pantalones Hombre','https://www.amazon.es/Amazon-Essentials-Fleece-Sweatpant-Pantalones/dp/B075JNJB9B/ref=sr_1_2_sspa?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=pants&qid=1584725687&sr=8-2-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUFOSEE4TFZMM0tYVEsmZW5jcnlwdGVkSWQ9QTA4NDE0MTZZSVMyRUdZR09DSkQmZW5jcnlwdGVkQWRJZD1BMDA1MzE3Nk8yTzZHMzJKTldZRCZ3aWRnZXROYW1lPXNwX2F0ZiZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU=','imgs/ProductoDeAmazon.png');
 
 INSERT INTO producto (nombre,link,imgLink)
-VALUES ('ASICS Gel-Noosa Tri 12, Road Running Shoe para Hombre','https://www.amazon.es/Gel-Noosa-Running-Hombre-Seguridad-Amarillo/dp/B081TMZBGS/ref=sr_1_43?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=shoes&qid=1584725867&sr=8-43&swrs=F3A8CC41FB1CB6174CA26FBAEDD49E07','https://images-na.ssl-images-amazon.com/images/I/816v9mtkXnL._AC_UX695_.jpg');
+VALUES ('ASICS Gel-Noosa Tri 12, Road Running Shoe para Hombre','https://www.amazon.es/Gel-Noosa-Running-Hombre-Seguridad-Amarillo/dp/B081TMZBGS/ref=sr_1_43?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=shoes&qid=1584725867&sr=8-43&swrs=F3A8CC41FB1CB6174CA26FBAEDD49E07','imgs/ProductoDeAmazon.png');
 
 INSERT INTO producto (nombre,link,imgLink)
-VALUES ('Camiseta Hombre Verano Manga Corta 3D Geometría Impresión Moda Originales Camiseta Casual T-Shirt Blusas Camisas Camiseta Cuello Redondo Suave básica Deporte Chándal Hombre Camiseta Tops vpass','https://www.amazon.es/Camiseta-Geometr%C3%ADa-Impresi%C3%B3n-Originales-T-Shirt/dp/B084MKLY5Q/ref=sr_1_41?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=t-shirts&qid=1584726103&sr=8-41&th=1','https://images-na.ssl-images-amazon.com/images/I/61FxW6fadWL._AC_UX679_.jpg');
+VALUES ('Camiseta Hombre Verano Manga Corta 3D Geometría Impresión Moda Originales Camiseta Casual T-Shirt Blusas Camisas Camiseta Cuello Redondo Suave básica Deporte Chándal Hombre Camiseta Tops vpass','https://www.amazon.es/Camiseta-Geometr%C3%ADa-Impresi%C3%B3n-Originales-T-Shirt/dp/B084MKLY5Q/ref=sr_1_41?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=t-shirts&qid=1584726103&sr=8-41&th=1','imgs/ProductoDeAmazon.png');
 
 INSERT INTO producto (nombre,link,imgLink)
-VALUES ('Corsair K70 LUX - Teclado mecánico Gaming, retroiluminación LED roja, Cherry MX Speed (Rápido y altamente preciso) - [QWERTY Español]','https://www.amazon.es/Corsair-K70-Lux-RGB-Retroiluminaci%C3%B3n/dp/B01FWCR922/ref=sr_1_6?dchild=1&fst=as%3Aoff&qid=1584726562&refinements=p_n_feature_keywords_two_browse-bin%3A2711403031%2Cp_72%3A831280031%2Cp_36%3A20000-&rnid=1323854031&s=computers&sr=1-6&th=1','https://images-na.ssl-images-amazon.com/images/I/71Y%2Bw9WUQML._AC_SX679_.jpg');
+VALUES ('Corsair K70 LUX - Teclado mecánico Gaming, retroiluminación LED roja, Cherry MX Speed (Rápido y altamente preciso) - [QWERTY Español]','https://www.amazon.es/Corsair-K70-Lux-RGB-Retroiluminaci%C3%B3n/dp/B01FWCR922/ref=sr_1_6?dchild=1&fst=as%3Aoff&qid=1584726562&refinements=p_n_feature_keywords_two_browse-bin%3A2711403031%2Cp_72%3A831280031%2Cp_36%3A20000-&rnid=1323854031&s=computers&sr=1-6&th=1','imgs/ProductoDeAmazon.png');
 
 INSERT INTO producto (nombre,link,imgLink)
-VALUES ('PNY VCQRTX8000-PB - Tarjeta gráfica (Quadro RTX 8000, 48 GB, GDDR6, 7680 x 4320 Pixeles, PCI Express x16 3.0, 1 Ventilador(es))','https://www.amazon.es/PNY-VCQRTX8000-PB-Tarjeta-gr%C3%A1fica-Ventilador/dp/B07NH3HKG9/ref=sr_1_1?__mk_es_ES=%C3%85M%C3%85Z%C3%95%C3%91&dchild=1&qid=1584727093&sr=8-1&srs=11606862031','https://images-na.ssl-images-amazon.com/images/I/51wVImu3aKL._AC_SX679_.jpg');
+VALUES ('PNY VCQRTX8000-PB - Tarjeta gráfica (Quadro RTX 8000, 48 GB, GDDR6, 7680 x 4320 Pixeles, PCI Express x16 3.0, 1 Ventilador(es))','https://www.amazon.es/PNY-VCQRTX8000-PB-Tarjeta-gr%C3%A1fica-Ventilador/dp/B07NH3HKG9/ref=sr_1_1?__mk_es_ES=%C3%85M%C3%85Z%C3%95%C3%91&dchild=1&qid=1584727093&sr=8-1&srs=11606862031','imgs/ProductoDeAmazon.png');
 
 INSERT INTO contenido (precioObjetivo, idLista, idProducto)
 VALUES (16.01,1,1);
@@ -122,3 +122,4 @@ VALUES (7000.00,NOW(),5);
 
 INSERT INTO precio (coste,fecha,idProducto)
 VALUES (6754.33,SUBDATE(NOW(),1),5);
+
