@@ -274,7 +274,7 @@
           </div>
 		<%} else if(error != null){ %>
           	
-          	<div class="error"><%=error %></div>
+          	<div class="error"><h1><%=error %></h1></div>
           	
           <%} %>
 

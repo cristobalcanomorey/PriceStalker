@@ -129,10 +129,10 @@
                             <div class="col-xl-7 col-lg-12 col-sm-12">
                                 <img alt="Imágen del producto" class="mx-auto d-block w-100" src="<%=productoSinPrecio.getImgLink()%>">
                             </div>
-                            <div class="col-xl-5 col-lg-12 col-sm-12 d-flex align-items-center text-right">
+                            <div class="col-xl-5 col-lg-12 col-sm-12 d-flex align-items-center text-center">
                                 <div class="mx-auto">
                                 <%if(!productoSinPrecio.getNombre().equals("El enlace de este producto no funciona.")){ %>
-                                <div class="text-dark mb-4"><h4>Hasta que escaneemos el producto desconocemos el precio actual</h4></div>
+                                	<div class="text-dark mb-4"><h5>Hasta que escaneemos el producto desconocemos el precio actual</h5></div>
 								<%} %>
                                     <div class="text-dark mt-4"><h4>Precio objetivo: <span class="text-nowrap"><%=String.format("%.2f",productoSinPrecio.getPrecioObjetivo())%> €</span></h4></div>
                                 </div>
@@ -149,7 +149,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink1">
                       <div class="dropdown-header">Opciones:</div>
-                      <a class="dropdown-item" href="Grafica?producto=<%=productoSinPrecio.getId()%>"><i class="fas fa-fw fa-chart-area"></i>Historial de precios</a>
+<%--                       <a class="dropdown-item" href="Grafica?producto=<%=productoSinPrecio.getId()%>"><i class="fas fa-fw fa-chart-area"></i>Historial de precios</a> --%>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="Eliminar?producto=<%=productoSinPrecio.getId()%>">Eliminar de la lista</a>
                     </div>
@@ -197,7 +197,9 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink1">
                       <div class="dropdown-header">Opciones:</div>
+                      <%if(!producto.getCoste().equals(Double.valueOf("-1"))){ %>
                       <a class="dropdown-item" href="Grafica?producto=<%=producto.getId()%>"><i class="fas fa-fw fa-chart-area"></i>Historial de precios</a>
+                      <%} %>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="Eliminar?producto=<%=producto.getId()%>">Eliminar de la lista</a>
                     </div>
