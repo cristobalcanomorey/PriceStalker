@@ -15,7 +15,8 @@
 	select * from precio
 where idProducto = (select idProducto from contenido
 where id=#{contenidoId}) AND
-coste >= 0;
+coste >= 0
+order by precio.fecha DESC;
 	</select>
 	
 	<insert id="insertPrecio" useGeneratedKeys='true' keyProperty='id'>
