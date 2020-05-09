@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import aplicacion.modelo.LogSingleton;
 import aplicacion.modelo.ejb.GraficasEJB;
+import aplicacion.modelo.ejb.ListasEJB;
 import aplicacion.modelo.ejb.ProductosEJB;
 import aplicacion.modelo.ejb.SesionesEJB;
 import aplicacion.modelo.pojo.Precio;
@@ -31,6 +32,9 @@ public class Grafica extends HttpServlet {
 	GraficasEJB graficasEJB;
 
 	@EJB
+	ListasEJB listasEJB;
+
+	@EJB
 	ProductosEJB productosEJB;
 
 	@Override
@@ -41,40 +45,45 @@ public class Grafica extends HttpServlet {
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 		String idContenido = request.getParameter("producto");
 		if (usuario != null && idContenido != null) {
-			ArrayList<Precio> precios = graficasEJB.obtenerPreciosDeProductoPorIdContenido(idContenido);
-			Producto producto = productosEJB.obtenerProductoPorIdContenido(idContenido);
-			if (precios != null & producto != null) {
-				String labels = graficasEJB.fechasEnPreciosAJson(precios);
-				String data = graficasEJB.costesEnPreciosAJson(precios);
-				RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaGrafica.jsp");
-				request.setAttribute("usuario", usuario);
-				request.setAttribute("labels", labels);
-				request.setAttribute("data", data);
-				request.setAttribute("producto", producto);
-				try {
-					rs.forward(request, response);
-				} catch (ServletException | IOException e) {
-					log.getLoggerGrafica().error("Se ha producido un error en GET Grafica: ", e);
-				}
-			} else {
-				String nombreDelProducto = productosEJB.getNombrePorIdContenido(idContenido);
-				if (nombreDelProducto != null) {
-					if (nombreDelProducto.equals("Producto sin nombre")) {
-						RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaGrafica.jsp");
-						request.setAttribute("usuario", usuario);
-						request.setAttribute("error",
-								"Todavía no hemos obtenido ningún dato de este producto, vuelve a intentarlo mañana.");
-						try {
-							rs.forward(request, response);
-						} catch (ServletException | IOException e) {
-							log.getLoggerGrafica().error("Se ha producido un error en GET Grafica: ", e);
+			boolean productoDeSuLista = listasEJB.productoEstaEnSuLista(idContenido, usuario.getId());
+			if (productoDeSuLista) {
+				ArrayList<Precio> precios = graficasEJB.obtenerPreciosDeProductoPorIdContenido(idContenido);
+				Producto producto = productosEJB.obtenerProductoPorIdContenido(idContenido);
+				if (precios != null & producto != null) {
+					String labels = graficasEJB.fechasEnPreciosAJson(precios);
+					String data = graficasEJB.costesEnPreciosAJson(precios);
+					RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaGrafica.jsp");
+					request.setAttribute("usuario", usuario);
+					request.setAttribute("labels", labels);
+					request.setAttribute("data", data);
+					request.setAttribute("producto", producto);
+					try {
+						rs.forward(request, response);
+					} catch (ServletException | IOException e) {
+						log.getLoggerGrafica().error("Se ha producido un error en GET Grafica: ", e);
+					}
+				} else {
+					String nombreDelProducto = productosEJB.getNombrePorIdContenido(idContenido);
+					if (nombreDelProducto != null) {
+						if (nombreDelProducto.equals("Producto sin nombre")) {
+							RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaGrafica.jsp");
+							request.setAttribute("usuario", usuario);
+							request.setAttribute("error",
+									"Todavía no hemos obtenido ningún dato de este producto, vuelve a intentarlo mañana.");
+							try {
+								rs.forward(request, response);
+							} catch (ServletException | IOException e) {
+								log.getLoggerGrafica().error("Se ha producido un error en GET Grafica: ", e);
+							}
+						} else {
+							response.sendRedirect("Principal");
 						}
 					} else {
 						response.sendRedirect("Principal");
 					}
-				} else {
-					response.sendRedirect("Principal");
 				}
+			} else {
+				response.sendRedirect("Principal");
 			}
 		} else {
 			response.sendRedirect("Principal");

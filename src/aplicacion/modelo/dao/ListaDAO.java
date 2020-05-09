@@ -68,4 +68,14 @@ public class ListaDAO {
 		}
 	}
 
+	public static Integer getIdContenidoPorIdContenidoEIdUsuario(String idContenido, Integer idUsuario) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			ListasMapper listasMapper = sqlSession.getMapper(ListasMapper.class);
+			return listasMapper.getIdContenidoPorIdContenidoEIdUsuario(idContenido, idUsuario);
+		} finally {
+			sqlSession.close();
+		}
+	}
+
 }

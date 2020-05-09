@@ -24,6 +24,12 @@
 where idProducto = #{id};
 	</select>
 	
+	<select id="getIdContenidoPorIdContenidoEIdUsuario" resultType="java.lang.Integer">
+	select id from contenido
+where idLista in (select id from lista where idUsuario = #{idUsuario}) AND
+id = #{idContenido};
+	</select>
+	
 	<insert id='insertLista' useGeneratedKeys='true' keyProperty='id'>
 		INSERT INTO lista (nombre,idUsuario)
 		VALUES(#{nombreLista},#{id})

@@ -17,4 +17,7 @@ public interface ListasMapper {
 			@Param("idProducto") Integer idProducto);
 
 	public ArrayList<Contenido> getContenidosPorIdProducto(@Param("id") Integer id);
+
+	public Integer getIdContenidoPorIdContenidoEIdUsuario(@Param("idContenido") String idContenido,
+			@Param("idUsuario") Integer idUsuario);
 }

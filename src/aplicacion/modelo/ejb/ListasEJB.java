@@ -32,4 +32,9 @@ public class ListasEJB {
 	public ArrayList<Contenido> getContenidosPorIdProducto(Integer id) {
 		return ListaDAO.getContenidosPorIdProducto(id);
 	}
+
+	public boolean productoEstaEnSuLista(String idContenido, Integer idUsuario) {
+		Integer id = ListaDAO.getIdContenidoPorIdContenidoEIdUsuario(idContenido, idUsuario);
+		return id != null;
+	}
 }
