@@ -149,7 +149,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink1">
                       <div class="dropdown-header">Opciones:</div>
-                      <a class="dropdown-item" href="Grafica?producto=<%=productoSinPrecio.getId()%>">Historial de precios</a>
+                      <a class="dropdown-item" href="Grafica?producto=<%=productoSinPrecio.getId()%>"><i class="fas fa-fw fa-chart-area"></i>Historial de precios</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="Eliminar?producto=<%=productoSinPrecio.getId()%>">Eliminar de la lista</a>
                     </div>
@@ -197,7 +197,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink1">
                       <div class="dropdown-header">Opciones:</div>
-                      <a class="dropdown-item" href="Grafica?producto=<%=producto.getId()%>">Historial de precios</a>
+                      <a class="dropdown-item" href="Grafica?producto=<%=producto.getId()%>"><i class="fas fa-fw fa-chart-area"></i>Historial de precios</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="Eliminar?producto=<%=producto.getId()%>">Eliminar de la lista</a>
                     </div>
