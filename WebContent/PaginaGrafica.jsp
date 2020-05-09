@@ -196,6 +196,7 @@
 
           <div class="row">
 
+			<%if(labels != null & data != null){ %>
             <!-- Area Chart -->
             <div class="col-xl-8 col-lg-7">
               <div class="card shadow mb-4">
@@ -217,13 +218,27 @@
                 <!-- Card Body -->
                 <div class="card-body">
                   <div class="chart-area">
-                  <%if(labels != null & data != null){ %>
                     <canvas id="myAreaChart"></canvas>
-                    <%} %>
                   </div>
                 </div>
               </div>
             </div>
+            <%} else{ %>
+            <!-- Approach -->
+            <div class="col-xl-8 col-lg-7">
+	              <div class="card shadow mb-4">
+	                <div class="card-header py-3">
+	                  <h6 class="m-0 font-weight-bold text-primary">No precios asociados a este producto</h6>
+	                </div>
+	                <div class="mx-auto">
+		                <div class="card-body">
+		                  <p>La visualización del historial de precios de este producto no está disponible todavía.</p>
+		                  <p class="mb-0">Disculpe las molestias.</p>
+		                </div>
+	                </div>
+	              </div>
+              </div>
+            <%} %>
 
             <!-- Pie Chart -->
             <div class="col-xl-4 col-lg-5">
