@@ -38,7 +38,6 @@ public class AddProducto extends HttpServlet {
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 		if (usuario != null) {
 			RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaAddProducto.jsp");
-			request.setAttribute("usuario", usuario);
 			request.setAttribute("nombreLista", listasEJB.getNombreLista(usuario.getId()));
 			try {
 				rs.forward(request, response);
