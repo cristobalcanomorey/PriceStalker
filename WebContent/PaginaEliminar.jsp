@@ -62,13 +62,13 @@
                     <p class="mb-4">Nombre: <a href="<%= producto.getLink()%>"><%=producto.getNombre() %></a></p>
                     <p>¿Seguro que quieres eliminar este producto de tu lista?</p>
                     <button type="submit" class="btn btn-primary btn-user btn-block">Eliminar producto de mi lista</button>
-                    <a href="forgot-password.html" class="btn btn-danger btn-user btn-block">Cancelar</a>
+                    <a href="Lista" class="btn btn-danger btn-user btn-block">Cancelar</a>
                     <input type="hidden" name="idContenido" value="<%=producto.getId() %>">
                   </form>
                   <%} %>
                   <hr>
                   <div class="text-center">
-                    <a class="small" href="forgot-password.html">Volver a la página principal</a>
+                    <a class="small" href="Principal">Volver a la página principal</a>
                   </div>
                   <div class="text-center">
                     <a class="small" href="Lista">Volver a la lista de productos</a>
