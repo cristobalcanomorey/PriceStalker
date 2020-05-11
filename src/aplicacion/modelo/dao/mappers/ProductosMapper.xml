@@ -67,6 +67,7 @@ contenido.idLista = (select lista.id from lista where lista.idUsuario = #{idUsua
 	<select id="getProductoAEliminar" resultMap="ProductoSinPrecioResult">
 	select contenido.id,producto.nombre,producto.link,contenido.precioObjetivo,producto.imgLink from producto, contenido
 where contenido.idProducto = producto.id AND
+idLista = (select id from lista where idUsuario = #{idUsuario}) AND
 contenido.id = #{contenidoId};
 	</select>
 	

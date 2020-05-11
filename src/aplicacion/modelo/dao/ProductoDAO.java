@@ -74,11 +74,11 @@ public class ProductoDAO {
 		}
 	}
 
-	public static ProductoSinPrecio getProductoAEliminar(int contenidoId) {
+	public static ProductoSinPrecio getProductoAEliminar(int contenidoId, Integer idUsuario) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			ProductosMapper productosMapper = sqlSession.getMapper(ProductosMapper.class);
-			return productosMapper.getProductoAEliminar(contenidoId);
+			return productosMapper.getProductoAEliminar(contenidoId, idUsuario);
 		} finally {
 			sqlSession.close();
 		}

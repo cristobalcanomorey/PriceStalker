@@ -23,7 +23,8 @@ public interface ProductosMapper {
 
 	public String getNombrePorIdContenido(@Param("contenidoId") int contenidoId);
 
-	public ProductoSinPrecio getProductoAEliminar(@Param("contenidoId") int contenidoId);
+	public ProductoSinPrecio getProductoAEliminar(@Param("contenidoId") int contenidoId,
+			@Param("idUsuario") Integer idUsuario);
 
 	public void eliminarProductoDeLaLista(@Param("contenidoId") int contenidoId, @Param("idUsuario") Integer idUsuario);
 

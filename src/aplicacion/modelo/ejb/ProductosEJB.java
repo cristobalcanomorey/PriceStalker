@@ -50,7 +50,7 @@ public class ProductosEJB {
 		return ProductoDAO.getNombrePorIdContenido(contenidoId);
 	}
 
-	public ProductoSinPrecio getProductoAEliminar(String idContenido) {
+	public ProductoSinPrecio getProductoAEliminar(String idContenido, Integer idUsuario) {
 		LogSingleton log = LogSingleton.getInstance();
 		int contenidoId = -1;
 		try {
@@ -59,7 +59,7 @@ public class ProductosEJB {
 			log.getLoggerProductosEJB().error("Se ha producido un error en ProductosEJB: ", e);
 			return null;
 		}
-		return ProductoDAO.getProductoAEliminar(contenidoId);
+		return ProductoDAO.getProductoAEliminar(contenidoId, idUsuario);
 	}
 
 	public void eliminarProductoDeLaLista(String idContenido, Integer idUsuario) {

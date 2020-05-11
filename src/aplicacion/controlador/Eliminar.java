@@ -35,7 +35,7 @@ public class Eliminar extends HttpServlet {
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 		String idContenido = request.getParameter("producto");
 		if (usuario != null & idContenido != null) {
-			ProductoSinPrecio producto = productosEJB.getProductoAEliminar(idContenido);
+			ProductoSinPrecio producto = productosEJB.getProductoAEliminar(idContenido, usuario.getId());
 			if (producto != null) {
 				RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaEliminar.jsp");
 				request.setAttribute("usuario", usuario);
