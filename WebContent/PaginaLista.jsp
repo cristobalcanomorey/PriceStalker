@@ -125,7 +125,7 @@
                   <!-- Card Body -->
                 <div class="card-body">
                     <div class="container-fluid">
-                        <div class="row">
+                        <div class="row align-items-center">
                             <div class="col-xl-7 col-lg-12 col-sm-12">
                                 <img alt="Imágen del producto" class="mx-auto d-block w-100" src="<%=productoSinPrecio.getImgLink()%>">
                             </div>
@@ -149,7 +149,6 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink1">
                       <div class="dropdown-header">Opciones:</div>
-<%--                       <a class="dropdown-item" href="Grafica?producto=<%=productoSinPrecio.getId()%>"><i class="fas fa-fw fa-chart-area"></i>Historial de precios</a> --%>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="Eliminar?producto=<%=productoSinPrecio.getId()%>">Eliminar de la lista</a>
                     </div>
@@ -171,7 +170,7 @@
                   <!-- Card Body -->
                 <div class="card-body">
                     <div class="container-fluid">
-                        <div class="row">
+                        <div class="row align-items-center">
                             <div class="col-xl-7 col-lg-12 col-sm-12">
                                 <img alt="Imágen del producto" class="mx-auto d-block w-100" src="<%=producto.getImgLink()%>">
                             </div>
@@ -198,7 +197,7 @@
                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink1">
                       <div class="dropdown-header">Opciones:</div>
                       <%if(!producto.getCoste().equals(Double.valueOf("-1"))){ %>
-                      <a class="dropdown-item" href="Grafica?producto=<%=producto.getId()%>"><i class="fas fa-fw fa-chart-area"></i>Historial de precios</a>
+                      <a class="dropdown-item" href="Grafica?producto=<%=producto.getId()%>"><i class="fas fa-fw fa-chart-area text-gray-400"></i>Historial de precios</a>
                       <%} %>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="Eliminar?producto=<%=producto.getId()%>">Eliminar de la lista</a>
