@@ -20,9 +20,11 @@ import aplicacion.modelo.pojo.Usuario;
 public class AdminUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private final String FALTAN_DATOS = "Debes rellenar todos los campos obligatorios.";
-	private final String PASSWORD_INCORRECTO = "La contraseña original no es correcta.";
-	private final String PASSWORDS_NUEVOS_NO_COINCIDEN = "Las contraseñas nuevas no coinciden.";
+	private final String FALTAN_DATOS = "Debes rellenar todos los campos obligatorios";
+	private final String NO_REPITE_PASSWORD = "Debes introducir la nueva contraseña dos veces";
+	private final String PASSWORD_INCORRECTO = "La contraseña original no es correcta";
+	private final String PASSWORDS_NUEVOS_NO_COINCIDEN = "Las contraseñas nuevas no coinciden";
+	private final String EXISTE_USUARIO = "Ya tenemos otro usuario registrado con ese correo";
 
 	@EJB
 	SesionesEJB sesionesEJB;
@@ -68,17 +70,33 @@ public class AdminUser extends HttpServlet {
 				 * encuentra muestra un mensaje de error.
 				 */
 				Usuario usuarioAModificar = usuariosEJB.loginUsuario(usuarioLogueado.getCorreo(), password);
-				if (usuarioAModificar != null) {
-					if (password2.equals(confirmaPassword2)) {
-						usuariosEJB.editarUsuario(usuarioAModificar.getCorreo(), nombre, correo, password2);
-						sesionesEJB.logoutUsuario(session);
-						RequestDispatcher rd = getServletContext().getRequestDispatcher("/Login");
-						rd.forward(request, response);
+				boolean correoRepetido = false;
+				if (!usuarioLogueado.getCorreo().equals(correo)) {
+					correoRepetido = usuariosEJB.existeUsuario(correo);
+				}
+				if (!correoRepetido) {
+					if (usuarioAModificar != null) {
+						if (password2.equals("") && confirmaPassword2.equals("")) {
+							password2 = usuarioAModificar.getPassword();
+							confirmaPassword2 = password2;
+						}
+						if (!password2.equals("") && !confirmaPassword2.equals("")) {
+							if (password2.equals(confirmaPassword2)) {
+								usuariosEJB.editarUsuario(usuarioAModificar.getCorreo(), nombre, correo, password2);
+								sesionesEJB.logoutUsuario(session);
+								RequestDispatcher rd = getServletContext().getRequestDispatcher("/Login");
+								rd.forward(request, response);
+							} else {
+								error = PASSWORDS_NUEVOS_NO_COINCIDEN;
+							}
+						} else {
+							error = NO_REPITE_PASSWORD;
+						}
 					} else {
-						error = PASSWORDS_NUEVOS_NO_COINCIDEN;
+						error = PASSWORD_INCORRECTO;
 					}
 				} else {
-					error = PASSWORD_INCORRECTO;
+					error = EXISTE_USUARIO;
 				}
 			} else {
 				error = FALTAN_DATOS;
