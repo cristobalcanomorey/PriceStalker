@@ -116,7 +116,7 @@
                   <p>¡Pues nosotros no! ¡Nos encargamos de vigilar cada día el precio del producto por tí!</p>
                   <p>La sencilla funcionalidad de PriceStalker permite a cualquiera adentrarse en el maravilloso mundo del seguimiento de precios automatizado. Tan solo creando una cuenta de usuario y copiando los enlaces del producto en nuestra página ya podrás monitorizar tus productos de varias tiendas online en una misma página y recibir notificaciones cuando algún producto de tu lista baje de precio por debajo del umbral establecido.</p>
                   <p class="mb-0">¿No es tu primera vez aquí?</p>
-                  <a target="_blank" rel="nofollow" href="Login">Inicia sesión &rarr;</a>
+                  <a href="Login">Inicia sesión &rarr;</a>
                 </div>
               </div>
             </div>
@@ -127,14 +127,16 @@
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">Mini tutorial</h6>
                 </div>
-                <div class="card-body text-dark">
+                <div class="card-body text-dark" style="min-height: 691.6px">
                   <p class="mb-0">Lo primero es crear una cuenta de usuario introduciendo tu nombre de usuario, un correo al que quieras recibir las alertas cuando algún producto baje de precio y una contraseña segura.</p>
                   <p><a target="_blank" rel="nofollow" href="Registro">Empecemos &rarr;</a></p>
                   <p>Una vez creada tu cuenta de PriceStalker ya tienes acceso total a nuestros servicios. El siguiente paso es crear una lista de productos. ¡Así es! ¡En Plural!</p>
                   <p>Copia el enlace del primer producto que quieres que vigilemos y pegalo en nuestra página. La primera véz te pedirá que escribas el nombre de tu lista. Puedes poner un nombre genérico como "lísta de la compra", uno más específico como "Portátiles", o "adfjaskkjas" si tienes prisa.</p>
                   <p class="mb-0">También te pedirá el precio "objetivo". Este es el précio al que te gustaría comprar el producto. El día que el producto que quieres tenga este precio o menos te mandaremos un correo para avisarte.</p>
-                  <p><a target="_blank" rel="nofollow" href="AddProducto">Crea tu lista de productos &rarr;</a></p>
-                  <p><a target="_blank" rel="nofollow" href="AddProducto">¿Ya tienes una? Añade otro producto &rarr;</a></p>
+                  <%if(usuario != null){ %>
+                  <p><a href="AddProducto">Crea tu lista de productos &rarr;</a></p>
+                  <p><a href="AddProducto">¿Ya tienes una? Añade otro producto &rarr;</a></p>
+                  <%} %>
                   <div class="text-center">
                     <img class="img-fluid px-3 px-sm-4" style="width: 25rem;" src="imgs/undraw_web_search_eetr.png" alt="Imágen de escaneo">
                   </div>

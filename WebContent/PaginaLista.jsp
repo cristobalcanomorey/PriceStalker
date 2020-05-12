@@ -216,8 +216,23 @@
 
 		<%
 			} else{%>
-				<h3>No tienes ninguna lista de productos</h3>
-				<a href="AddProducto">Crear lista de productos</a>
+				<!-- 404 Error Text -->
+          <div class="text-center">
+              <div class="error mx-auto text-left" style="width: 400px" data-text="...¡Ups!">...¡Ups!</div>
+              <h3>No tienes ninguna lista de productos</h3>
+            <div class="col-lg-5 mx-auto"><img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="imgs/undraw_blank_canvas_3rbb.png" alt=""></div>
+            <p class="lead text-gray-800">Esta cuenta de usuario no tiene asociada ningúna lista de productos todavía.</p>
+            <p class="lead text-gray-800">Si es tu primera vez aquí no hay nada de que preocuparse.</p>
+            <p class="text-gray-800 mb-0">Crea tu primera lista de productos en esta cuenta de usuario.</p>
+            <a href="AddProducto">Crear una lista de productos &rarr;</a>
+            <br>
+            <a href="Principal">&larr; Volver a la página principal</a>
+          </div>
+          </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
 			<%}
 		}
 	%>
