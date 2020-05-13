@@ -53,46 +53,43 @@
       <div id="content">
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <nav class="navbar navbar-expand-sm navbar-light bg-white  mb-4 static-top shadow">
+          <a class="nav-brand mr-auto" href="Principal"><img alt="Logo" src="imgs/PriceStalkerLogoB1_transparentRecortado.png" class="" style="max-width: 190px"></a>
+          <%
+          if(usuario != null){
+          %>
+          <button class="navbar-toggler mx-auto" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link text-dark text-center" href="AddProducto"><%=opcionAddProducto %></a>
+              </li>
 
-          <div class="navvar-nav mr-auto">
-              <h2><a class="nav-link text-dark" href="Principal">PriceStalker</a></h2>
+              <li class="topbar-divider d-none d-sm-block"></li>
+
+              <!-- Nav Item - User Information -->
+              <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle text-dark text-center" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <%=usuario.getNombre() %>
+                </a>
+                <!-- Dropdown - User Information -->
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                  <a class="dropdown-item" href="AdminUser">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Administrar usuario
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Cerrar sesión
+                  </a>
+                </div>
+              </li>
+            </ul>
           </div>
-
-			<%
-				if(usuario != null){
-			%>
-          <!-- Topbar Navbar -->
-          <ul class="navbar-nav ml-auto">
-
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="AddProducto"><%=opcionAddProducto %></a>
-            </li>
-
-            <li class="topbar-divider d-none d-sm-block"></li>
-
-            <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle text-dark" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <%=usuario.getNombre() %>
-              </a>
-              <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="AdminUser">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Administrar usuario
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Cerrar sesión
-                </a>
-              </div>
-            </li>
-
-          </ul>
-          <%	} %>
-
+          <%} %>
         </nav>
         <!-- End of Topbar -->
 
