@@ -37,11 +37,8 @@
       <div id="content">
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-          <div class="navvar-nav mr-auto">
-              <h2><a class="nav-link text-dark" href="Principal">PriceStalker</a></h2>
-          </div>
+        <nav class="navbar navbar-expand-sm navbar-light bg-white  mb-4 static-top shadow">
+          <a class="nav-brand mr-auto" href="Principal"><img alt="Logo" src="imgs/PriceStalkerLogoB1_transparentRecortado.png" class="" style="max-width: 190px"></a>
         </nav>
         <!-- End of Topbar -->
 
@@ -55,9 +52,10 @@
 
           <!-- 404 Error Text -->
           <div class="text-center">
-            <div class="error mx-auto" data-text="error">error...</div>
+            <div class="error mx-auto" data-text="error...">error...</div>
             <p class="lead text-gray-800 mb-5">El enlace de este producto no funciona</p>
-            <p class="text-gray-500 mb-0">Es posible que no hayas copiado el enlace por completo o que esa página ya no responda...</p>
+            <div class="col-lg-5 mx-auto"><img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="imgs/undraw_page_not_found_su7k.png" alt=""></div>
+            <p class="text-gray-800 mb-0">Es posible que no hayas copiado el enlace por completo o que esa página ya no responda...</p>
             <a href="Eliminar?producto=<%=idContenido %>">Eliminar producto de tu lista</a>
             <br>
             <a href="Lista">&larr; Volver a la lista de productos</a>
@@ -89,25 +87,6 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
