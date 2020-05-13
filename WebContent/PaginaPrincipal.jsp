@@ -40,53 +40,50 @@
       <div id="content">
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <nav class="navbar navbar-expand-sm navbar-light bg-white  mb-4 static-top shadow">
+          <a class="nav-brand mr-auto" href="Principal"><img alt="Logo" src="imgs/PriceStalkerLogoB1_transparentRecortado.png" class="" style="max-width: 190px"></a>
+          <button class="navbar-toggler mx-auto" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+            <%
+            if(usuario != null){
+            %>
+              <li class="nav-item">
+                  <a class="nav-link text-dark text-center" href="Lista">Tu lista de productos</a>
+              </li>
 
-          <div class="navvar-nav mr-auto">
-              <h2><a class="nav-link text-dark">PriceStalker</a></h2>
+              <li class="topbar-divider d-none d-sm-block"></li>
+
+              <!-- Nav Item - User Information -->
+              <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle text-dark text-center" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <%=usuario.getNombre() %>
+                </a>
+                <!-- Dropdown - User Information -->
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                  <a class="dropdown-item" href="AdminUser">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Administrar usuario
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Cerrar sesión
+                  </a>
+                </div>
+              </li>
+              <%}else{ %>
+              <li class="nav-item">
+                  <a class="nav-link text-dark text-center" href="Registro">Registrarse</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link text-dark text-center" href="Login">Iniciar sesión</a>
+              </li>
+              <%} %>
+            </ul>
           </div>
-
-          <!-- Topbar Navbar -->
-          <ul class="navbar-nav ml-auto">
-
-			<%
-			if(usuario != null){
-			%>
-            <li class="nav-item">
-                <a href="Lista" class="nav-link text-dark">Tu lista de productos</a>
-            </li>
-
-            <li class="topbar-divider d-none d-sm-block"></li>
-
-            <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle text-dark" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <%=usuario.getNombre() %>
-              </a>
-              <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="AdminUser">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Administrar usuario
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Cerrar sesión
-                </a>
-              </div>
-            </li>
-            <%} else { %>
-            <li class="nav-item">
-                <a href="Registro" class="nav-link text-dark">Registrarse</a>
-            </li>
-            <li class="nav-item">
-                <a href="Login" class="nav-link text-dark">Iniciar sesión</a>
-            </li>
-            <%} %>
-
-          </ul>
-
         </nav>
         <!-- End of Topbar -->
 
