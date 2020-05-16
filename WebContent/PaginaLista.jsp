@@ -212,7 +212,7 @@
       <!-- End of Main Content -->
 
 		<%
-			} else{%>
+			} else if(nombreLista == null){%>
 				<!-- 404 Error Text -->
           <div class="text-center">
               <div class="error mx-auto text-left" style="width: 400px" data-text="...¡Ups!">...¡Ups!</div>
@@ -230,9 +230,25 @@
 
       </div>
       <!-- End of Main Content -->
-			<%}
-		}
-	%>
+			<%} else{%>
+				<!-- 404 Error Text -->
+          <div class="text-center">
+<!--               <div class="error mx-auto text-left" style="width: 400px" data-text="...¡Ups!">...¡Ups!</div> -->
+              <h3><%=nombreLista %></h3>
+            <div class="col-lg-5 mx-auto"><img class="img-fluid px-3 px-sm-4 mt-3 mb-4" src="imgs/undraw_empty_xct9.svg" alt=""></div>
+            <p class="lead text-gray-800">La lista de productos de esta cuenta se ha quedado vacía.</p>
+            <p class="text-gray-800 mb-0">Sin productos que escanear no te podemos ayudar a ahorrar...</p>
+            <a href="AddProducto">Añadir un producto a mi lista &rarr;</a>
+            <br>
+            <a href="Principal">&larr; Volver a la página principal</a>
+          </div>
+          </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+			<%} %>
+	<%}%>
 
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
