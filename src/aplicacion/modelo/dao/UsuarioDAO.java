@@ -85,4 +85,17 @@ public class UsuarioDAO {
 			sqlSession.close();
 		}
 	}
+
+	public static void editarNombreYCorreoDeUsuario(String correoOriginal, String nombreNuevo, String correoNuevo) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			if (correoOriginal != null & nombreNuevo != null & correoNuevo != null) {
+				UsuariosMapper usuariosMapper = sqlSession.getMapper(UsuariosMapper.class);
+				usuariosMapper.editarNombreYCorreoDeUsuario(correoOriginal, nombreNuevo, correoNuevo);
+				sqlSession.commit();
+			}
+		} finally {
+			sqlSession.close();
+		}
+	}
 }

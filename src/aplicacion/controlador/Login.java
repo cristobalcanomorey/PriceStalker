@@ -29,6 +29,7 @@ public class Login extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession(false);
 		LogSingleton log = LogSingleton.getInstance();
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
@@ -55,13 +56,17 @@ public class Login extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		LogSingleton log = LogSingleton.getInstance();
 		String correo = request.getParameter("correo");
-		/*
-		 * Importante no modificar el nombre del parametro "password2" para que
-		 * AdminUser funcione correctamente.
-		 */
 		String password = request.getParameter("password2");
+		/**
+		 * Si el usuario ha modificado su cuenta pero no ha cambiado su contraseña se
+		 * loguea con su contraseña original
+		 */
+		if (password.equals("")) {
+			password = request.getParameter("password");
+		}
 		Usuario usuario = usuariosEJB.loginUsuario(correo, password);
 		if (usuario == null) {
 			try {

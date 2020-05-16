@@ -23,6 +23,7 @@ public class Logout extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		LogSingleton log = LogSingleton.getInstance();
 		HttpSession session = request.getSession(false);
 		sesionesEJB.logoutUsuario(session);

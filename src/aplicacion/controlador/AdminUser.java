@@ -35,6 +35,7 @@ public class AdminUser extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession(false);
 		LogSingleton log = LogSingleton.getInstance();
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
@@ -54,6 +55,7 @@ public class AdminUser extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession(false);
 		LogSingleton log = LogSingleton.getInstance();
 		Usuario usuarioLogueado = sesionesEJB.usuarioLogeado(session);
@@ -76,10 +78,6 @@ public class AdminUser extends HttpServlet {
 				}
 				if (!correoRepetido) {
 					if (usuarioAModificar != null) {
-						if (password2.equals("") && confirmaPassword2.equals("")) {
-							password2 = usuarioAModificar.getPassword();
-							confirmaPassword2 = password2;
-						}
 						if (!password2.equals("") && !confirmaPassword2.equals("")) {
 							if (password2.equals(confirmaPassword2)) {
 								usuariosEJB.editarUsuario(usuarioAModificar.getCorreo(), nombre, correo, password2);
@@ -89,6 +87,11 @@ public class AdminUser extends HttpServlet {
 							} else {
 								error = PASSWORDS_NUEVOS_NO_COINCIDEN;
 							}
+						} else if (password2.equals("") && confirmaPassword2.equals("")) {
+							usuariosEJB.editarUsuario(usuarioAModificar.getCorreo(), nombre, correo, null);
+							sesionesEJB.logoutUsuario(session);
+							RequestDispatcher rd = getServletContext().getRequestDispatcher("/Login");
+							rd.forward(request, response);
 						} else {
 							error = NO_REPITE_PASSWORD;
 						}

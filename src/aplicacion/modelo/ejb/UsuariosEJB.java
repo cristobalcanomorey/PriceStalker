@@ -24,7 +24,12 @@ public class UsuariosEJB {
 	}
 
 	public void editarUsuario(String correoOriginal, String nombreNuevo, String correoNuevo, String passwordNuevo) {
-		UsuarioDAO.editarUsuario(correoOriginal, nombreNuevo, correoNuevo, passwordNuevo);
+		if (passwordNuevo != null) {
+			UsuarioDAO.editarUsuario(correoOriginal, nombreNuevo, correoNuevo, passwordNuevo);
+		} else {
+			UsuarioDAO.editarNombreYCorreoDeUsuario(correoOriginal, nombreNuevo, correoNuevo);
+		}
+
 	}
 
 	public void eliminarUsuario(Usuario usuario) {
