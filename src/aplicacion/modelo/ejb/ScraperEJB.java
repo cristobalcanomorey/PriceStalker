@@ -1,6 +1,7 @@
 package aplicacion.modelo.ejb;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -16,11 +17,11 @@ import aplicacion.modelo.pojo.ProductoScraped;
 @LocalBean
 public class ScraperEJB {
 
-	public ProductoScraped scrapeLink(String link, int ms) {
+	public ProductoScraped scrapeLink(String link) {
 		LogSingleton log = LogSingleton.getInstance();
 		Document doc;
 		try {
-			doc = Jsoup.connect(link).timeout(ms).get();
+			doc = Jsoup.connect(link).get();
 		} catch (IOException e) {
 			log.getLoggerScraperEJB().error("Se ha producido un error en ScraperEJB: " + e);
 			return null;
@@ -73,32 +74,44 @@ public class ScraperEJB {
 
 	private ProductoScraped obtenProductoDeAmazon(Document doc) {
 		LogSingleton log = LogSingleton.getInstance();
-		String titulo = null;
-		String precioString = null;
+		ArrayList<String> titulos = new ArrayList<String>();
+		ArrayList<String> precios = new ArrayList<String>();
 		try {
-			titulo = doc.select("#productTitle").text();
-			precioString = doc.select("#priceblock_ourprice").text();
-			return formarProductoScrapedDeAmazon(titulo, precioString);
+			titulos.add(doc.select("#productTitle").text());
+			precios.add(doc.select("#priceblock_ourprice").text());
 		} catch (NullPointerException e) {
 			log.getLoggerScraperEJB().error("Se ha producido un error en ScraperEJB: " + e);
 		}
 		try {
-			titulo = doc.select("#title").text();
-			precioString = doc.select("#olp-upd-new-freeshipping > a:nth-child(1) > span:nth-child(1)").text();
-			if (precioString.equals("")) {
-				precioString = doc.select("#outOfStock > div:nth-child(1) > div:nth-child(1) > span:nth-child(1)")
-						.text();
+			titulos.add(doc.select("#title").text());
+			precios.add(doc.select("#olp-upd-new-freeshipping > a:nth-child(1) > span:nth-child(1)").text());
+			precios.add(doc.select("#outOfStock > div:nth-child(1) > div:nth-child(1) > span:nth-child(1)").text());
+		} catch (NullPointerException e) {
+			log.getLoggerScraperEJB().error("Se ha producido un error en ScraperEJB: " + e);
+		}
+		try {
+			titulos.add(doc.select("#title").text());
+			precios.add(doc.select(".offer-price").text());
+		} catch (NullPointerException e) {
+			log.getLoggerScraperEJB().error("Se ha producido un error en ScraperEJB: " + e);
+		}
+		try {
+			titulos.add(doc.select("#productTitle").text());
+			precios.add(doc.select("#price_inside_buybox").text());
+		} catch (NullPointerException e) {
+			log.getLoggerScraperEJB().error("Se ha producido un error en ScraperEJB: " + e);
+		}
+		if (!titulos.isEmpty()) {
+			for (String titulo : titulos) {
+				if (!titulo.equals("")) {
+					for (String precio : precios) {
+						if (!precio.equals("")) {
+							return formarProductoScrapedDeAmazon(titulo, precio);
+						}
+					}
+					return formarProductoScrapedDeAmazon(titulo, "");
+				}
 			}
-			return formarProductoScrapedDeAmazon(titulo, precioString);
-		} catch (NullPointerException e) {
-			log.getLoggerScraperEJB().error("Se ha producido un error en ScraperEJB: " + e);
-		}
-		try {
-			titulo = doc.select("#title").text();
-			precioString = doc.select(".offer-price").first().text();
-			return formarProductoScrapedDeAmazon(titulo, precioString);
-		} catch (NullPointerException e) {
-			log.getLoggerScraperEJB().error("Se ha producido un error en ScraperEJB: " + e);
 		}
 		return null;
 	}
@@ -124,13 +137,24 @@ public class ScraperEJB {
 			String precio = doc.select("span.current").text();
 			String imgLink = doc.select("#product-image-placer").attr("src");
 			String precios[] = precio.split("€");
+			String disponibilidad = "";
+			Element opcion = doc.select("a.event:nth-child(6)").first();
+			if (opcion == null) {
+				opcion = doc.select("a.event:nth-child(7)").first();
+			}
+			disponibilidad = opcion.text();
 			if (precios.length > 1) {
 				precio = precios[0];
 			}
 			if (!precio.equals("")) {
-				precio = quitarSimboloEuro(precio);
-				return new ProductoScraped(titulo, Double.parseDouble(precio), imgLink);
+				if (disponibilidad.equals("Añadir a la cesta")) {
+					precio = quitarSimboloEuro(precio);
+					return new ProductoScraped(titulo, Double.parseDouble(precio), imgLink);
+				} else {
+					return new ProductoScraped(titulo, Double.parseDouble("-1"), imgLink);
+				}
 			}
+
 		} catch (NullPointerException e) {
 			log.getLoggerScraperEJB().error("Se ha producido un error en ScraperEJB: " + e);
 		}
