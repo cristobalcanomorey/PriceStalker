@@ -69,6 +69,7 @@
                 <button class="btn btn-primary btn-user btn-block" type="submit">
                   Editar usuario
                 </button>
+                <a href="Principal" class="btn btn-danger btn-user btn-block">Cancelar</a>
                 <hr>
               </form>
               <%} else{ %>

@@ -260,10 +260,10 @@
       </footer>
       <!-- End of Footer -->
 
-    </div>
-    <!-- End of Content Wrapper -->
+<!--     </div> -->
+<!--     End of Content Wrapper -->
 
-  </div>
+<!--   </div> -->
   <!-- End of Page Wrapper -->
 
   <!-- Scroll to Top Button-->
@@ -289,8 +289,8 @@
       </div>
     </div>
   </div>
-    </div>
-  </div>
+<!--     </div> -->
+<!--   </div> -->
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
