@@ -126,7 +126,7 @@
                 </div>
                 <div class="card-body text-dark" style="min-height: 691.6px">
                   <p class="mb-0">Lo primero es crear una cuenta de usuario introduciendo tu nombre de usuario, un correo al que quieras recibir las alertas cuando algún producto baje de precio y una contraseña segura.</p>
-                  <p><a target="_blank" rel="nofollow" href="Registro">Empecemos &rarr;</a></p>
+                  <p><a href="Registro">Empecemos &rarr;</a></p>
                   <p>Una vez creada tu cuenta de PriceStalker ya tienes acceso total a nuestros servicios. El siguiente paso es crear una lista de productos. ¡Así es! ¡En Plural!</p>
                   <p>Copia el enlace del primer producto que quieres que vigilemos y pegalo en nuestra página. La primera véz te pedirá que escribas el nombre de tu lista. Puedes poner un nombre genérico como "lísta de la compra", uno más específico como "Portátiles", o "adfjaskkjas" si tienes prisa.</p>
                   <p class="mb-0">También te pedirá el precio "objetivo". Este es el précio al que te gustaría comprar el producto. El día que el producto que quieres tenga este precio o menos te mandaremos un correo para avisarte.</p>

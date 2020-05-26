@@ -37,14 +37,14 @@ public class TimerPriceStalkerEJB {
 	private int numeroDeProductos = 0;
 
 	@SuppressWarnings("unused")
-	@Schedule(second = "0", minute = "28", hour = "16", dayOfWeek = "*", dayOfMonth = "*", month = "*", year = "*", info = "MyTimer")
+	@Schedule(second = "0", minute = "0", hour = "16", dayOfWeek = "*", dayOfMonth = "*", month = "*", year = "*", info = "MyTimer")
 	private void scheduledTimeout(final Timer t) {
 		numeroDeProductos = productosEJB.getNumeroDeProductosEnAlgunaLista();
-		if (numeroDeProductos > 3600) {
+		if (numeroDeProductos > 26) {
 			productosEJB.eliminarDefectuosos();
 			numeroDeProductos = productosEJB.getNumeroDeProductosEnAlgunaLista();
 		}
-		if (numeroDeProductos > 0 && numeroDeProductos <= 3600) {
+		if (numeroDeProductos > 0) {
 			ArrayList<CaracteristicasDeProducto> productos = productosEJB.getCaracteristicasDeProductos();
 
 			if (productos != null) {
