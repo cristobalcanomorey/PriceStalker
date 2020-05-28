@@ -11,6 +11,12 @@ import aplicacion.modelo.pojo.ProductoSinPrecio;
 
 public class ProductoDAO {
 
+	/****
+	 * Obtiene los productos de un usuario.
+	 * 
+	 * @param id ID del usuario.
+	 * @return Lista de productos.
+	 */
 	public static ArrayList<Producto> getProductosPorUserId(Integer id) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -21,6 +27,12 @@ public class ProductoDAO {
 		}
 	}
 
+	/****
+	 * Obtiene un producto y su coste actual por el ID contenido.
+	 * 
+	 * @param idContenido ID del contenido.
+	 * @return Producto con el coste actual.
+	 */
 	public static Producto getProductoPorIdContenido(String idContenido) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -31,6 +43,12 @@ public class ProductoDAO {
 		}
 	}
 
+	/****
+	 * Obtiene el id de un producto si el enlace ya existe o null si no existe.
+	 * 
+	 * @param enlace Enlace del producto.
+	 * @return ID del producto.
+	 */
 	public static Integer existeProducto(String enlace) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -41,6 +59,13 @@ public class ProductoDAO {
 		}
 	}
 
+	/****
+	 * Añade un producto en la tabla BBDD.
+	 * 
+	 * @param nombre  Nombre del producto.
+	 * @param enlace  Enlace de compra del producto.
+	 * @param imgLink Enlace de la imágen del producto.
+	 */
 	public static void insertProducto(String nombre, String enlace, String imgLink) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -54,6 +79,12 @@ public class ProductoDAO {
 		}
 	}
 
+	/****
+	 * Obtiene una lista de los productos sin precio de un usuario.
+	 * 
+	 * @param idUsuario ID del usuario.
+	 * @return Lista de productos de una lista que todabía no tienen precios.
+	 */
 	public static ArrayList<ProductoSinPrecio> productosSinPrecioPorUserId(Integer idUsuario) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -64,6 +95,12 @@ public class ProductoDAO {
 		}
 	}
 
+	/****
+	 * Obtiene el nombre de un producto a partir del ID del contenido.
+	 * 
+	 * @param contenidoId ID del contenido.
+	 * @return Nombre del producto.
+	 */
 	public static String getNombrePorIdContenido(int contenidoId) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -74,6 +111,13 @@ public class ProductoDAO {
 		}
 	}
 
+	/****
+	 * Obtiene un producto por el ID del usuario y el ID contenido.
+	 * 
+	 * @param contenidoId ID del contenido.
+	 * @param idUsuario   ID del usuario.
+	 * @return Producto.
+	 */
 	public static ProductoSinPrecio getProductoAEliminar(int contenidoId, Integer idUsuario) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -84,6 +128,12 @@ public class ProductoDAO {
 		}
 	}
 
+	/****
+	 * Elimina un contenido de la lista por su ID y el ID del usuario.
+	 * 
+	 * @param contenidoId ID del contenido.
+	 * @param idUsuario   ID del usuario.
+	 */
 	public static void eliminarProductoDeLaLista(int contenidoId, Integer idUsuario) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -97,6 +147,11 @@ public class ProductoDAO {
 		}
 	}
 
+	/***
+	 * Obtiene el número de productos que están al menos en una lista.
+	 * 
+	 * @return Número de productos.
+	 */
 	public static int getNumeroDeProductosEnAlgunaLista() {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -107,6 +162,11 @@ public class ProductoDAO {
 		}
 	}
 
+	/****
+	 * Modifica las características de un producto.
+	 * 
+	 * @param producto Producto con las nuevas características.
+	 */
 	public static void updateCaracteristicasDeProducto(CaracteristicasDeProducto producto) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -119,6 +179,11 @@ public class ProductoDAO {
 		}
 	}
 
+	/****
+	 * Obtiene las características de los productos.
+	 * 
+	 * @return Características de los productos.
+	 */
 	public static ArrayList<CaracteristicasDeProducto> getCaracteristicasDeProductos() {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -129,6 +194,11 @@ public class ProductoDAO {
 		}
 	}
 
+	/****
+	 * Modifica los datos de un producto para marcarlo como defectuoso.
+	 * 
+	 * @param caracteristicasDeProducto Características originales del producto.
+	 */
 	public static void marcarComoDefectuoso(CaracteristicasDeProducto caracteristicasDeProducto) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -141,6 +211,9 @@ public class ProductoDAO {
 		}
 	}
 
+	/****
+	 * Elimina todos los productos marcados como defectuosos.
+	 */
 	public static void eliminarDefectuosos() {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {

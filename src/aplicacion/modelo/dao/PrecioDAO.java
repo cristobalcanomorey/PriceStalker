@@ -9,6 +9,12 @@ import aplicacion.modelo.pojo.Precio;
 
 public class PrecioDAO {
 
+	/****
+	 * Obtiene los precios de un producto por el ID del contenido.
+	 * 
+	 * @param contenidoId ID del contenido.
+	 * @return Precios del producto.
+	 */
 	public static ArrayList<Precio> obtenerPreciosDeProductoPorIdContenido(int contenidoId) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
@@ -20,6 +26,12 @@ public class PrecioDAO {
 
 	}
 
+	/****
+	 * Añade un precio a un producto.
+	 * 
+	 * @param id     ID del producto.
+	 * @param precio Precio del producto.
+	 */
 	public static void insertPrecio(Integer id, Double precio) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
