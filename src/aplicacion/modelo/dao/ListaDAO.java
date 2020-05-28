@@ -105,7 +105,7 @@ public class ListaDAO {
 	 * 
 	 * @param idContenido ID del contenido.
 	 * @param idUsuario   ID del usuario.
-	 * @return
+	 * @return ID del contenido.
 	 */
 	public static Integer getIdContenidoPorIdContenidoEIdUsuario(String idContenido, Integer idUsuario) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();

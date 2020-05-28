@@ -25,6 +25,15 @@ import aplicacion.modelo.pojo.Usuario;
 @LocalBean
 public class MailEJB {
 
+	/****
+	 * Manda un correo al usuario.
+	 * 
+	 * @param usuario         Usuario que recibirá el correo.
+	 * @param contenido       Contenido de la lista que corresponde al producto que
+	 *                        ha bajado de precio.
+	 * @param productoScraped Producto que ha bajado de precio.
+	 * @param enlace          Enlace de compra.
+	 */
 	public void enviarCorreoBajadaDePrecio(Usuario usuario, Contenido contenido, ProductoScraped productoScraped,
 			String enlace) {
 		Mail correo = new Mail("smtp.gmail.com", 587, "priceStalkerOfficial@gmail.com", "jL79kQnsNpkzeuw");
@@ -39,6 +48,15 @@ public class MailEJB {
 		sendMail(usuario.getCorreo(), asunto, mensaje, correo);
 	}
 
+	/****
+	 * Manda un correo y devuelve true si lo ha podido mandar.
+	 * 
+	 * @param receptor Receptor del correo.
+	 * @param asunto   Asunto del correo.
+	 * @param mensaje  Mensaje del correo.
+	 * @param correo   Objeto Mail.
+	 * @return Boolean.
+	 */
 	public boolean sendMail(String receptor, String asunto, String mensaje, Mail correo) {
 		LogSingleton log = LogSingleton.getInstance();
 		Properties prop = new Properties();

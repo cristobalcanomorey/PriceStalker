@@ -17,6 +17,12 @@ import aplicacion.modelo.pojo.ProductoScraped;
 @LocalBean
 public class ScraperEJB {
 
+	/****
+	 * Hace scraping de un enlace y devuelve sus datos o null si no lo encuentra.
+	 * 
+	 * @param link Enlace del producto.
+	 * @return Los datos obtenidos de ese producto de ese producto.
+	 */
 	public ProductoScraped scrapeLink(String link) {
 		LogSingleton log = LogSingleton.getInstance();
 		Document doc;
@@ -39,6 +45,14 @@ public class ScraperEJB {
 		return result;
 	}
 
+	/****
+	 * Quita el simbolo del Euro, quita los puntos de los miles y reemplaza la coma
+	 * de los decimales por un punto. Devuelve null si precio es null.
+	 * 
+	 * @param precio Precio string a tratar.
+	 * @return Precio sin simbolo de Euro, con los puntos eliminados y con punto
+	 *         para los decimales en vez de una coma.
+	 */
 	private String quitarSimboloEuro(String precio) {
 		if (precio != null) {
 			String precios[] = precio.split("-");
@@ -52,6 +66,14 @@ public class ScraperEJB {
 		}
 	}
 
+	/****
+	 * Forma un objeto ProductoScraped a partir del título y precio de un producto.
+	 * Específico para los productos de Amazon.
+	 * 
+	 * @param titulo       Título de un producto.
+	 * @param precioString Precio de un producto.
+	 * @return ProductoScraped.
+	 */
 	private ProductoScraped formarProductoScrapedDeAmazon(String titulo, String precioString) {
 		LogSingleton log = LogSingleton.getInstance();
 		if (!titulo.equals("") & !precioString.equals("")) {
@@ -72,6 +94,17 @@ public class ScraperEJB {
 		}
 	}
 
+	/****
+	 * A partir del documento obtenido de un enlace, prueba a extraer los datos de
+	 * cuatro layouts diferentes de la página de Amazon y los guarda en un array.
+	 * Finalmente busca en cada array si ha encontrado un título y un precio para
+	 * devolver un producto, si el título falta devuelve null. Si el precio falta
+	 * pero el título no, devuelve un producto no disponible. Si los dos faltan
+	 * devuelve null
+	 * 
+	 * @param doc Documento HTML.
+	 * @return ProductoScraped.
+	 */
 	private ProductoScraped obtenProductoDeAmazon(Document doc) {
 		LogSingleton log = LogSingleton.getInstance();
 		ArrayList<String> titulos = new ArrayList<String>();
@@ -116,6 +149,13 @@ public class ScraperEJB {
 		return null;
 	}
 
+	/****
+	 * A partir del documento obtenido de un enlace, prueba a extraer los datos de
+	 * un layout de la página de Ebay.
+	 * 
+	 * @param doc Documento HTML
+	 * @return ProductoScraped.
+	 */
 	private ProductoScraped obtenProductoDeEbay(Document doc) {
 		LogSingleton log = LogSingleton.getInstance();
 		try {
@@ -130,6 +170,15 @@ public class ScraperEJB {
 		return null;
 	}
 
+	/****
+	 * A partir del documento obtenido de un enlace, prueba a extraer los datos de
+	 * un layout de la página de El Corte Ingles. Si está la opcion de añadir a la
+	 * cesta devuelve un producto. Si no está devuelve un producto no disponible. Si
+	 * algo falla devuelve null.
+	 * 
+	 * @param doc Documento HTML.
+	 * @return ProductoScraped.
+	 */
 	private ProductoScraped obtenProductoDeElCorteIngles(Document doc) {
 		LogSingleton log = LogSingleton.getInstance();
 		try {

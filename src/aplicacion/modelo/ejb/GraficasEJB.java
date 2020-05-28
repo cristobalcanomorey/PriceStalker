@@ -14,6 +14,12 @@ import aplicacion.modelo.pojo.Precio;
 @LocalBean
 public class GraficasEJB {
 
+	/****
+	 * Obtiene una lista de precios de un producto a partir del ID contenido.
+	 * 
+	 * @param idContenido ID contenido.
+	 * @return Lista de precios.
+	 */
 	public ArrayList<Precio> obtenerPreciosDeProductoPorIdContenido(String idContenido) {
 		LogSingleton log = LogSingleton.getInstance();
 		int contenidoId = -1;
@@ -26,6 +32,12 @@ public class GraficasEJB {
 		return PrecioDAO.obtenerPreciosDeProductoPorIdContenido(contenidoId);
 	}
 
+	/****
+	 * Convierte una lista de fechas a un string en formato JSON.
+	 * 
+	 * @param precios Lista de precios con sus fechas.
+	 * @return String en formato JSON.
+	 */
 	public String fechasEnPreciosAJson(ArrayList<Precio> precios) {
 		String resul = null;
 		if (!precios.isEmpty()) {
@@ -45,6 +57,12 @@ public class GraficasEJB {
 		return resul;
 	}
 
+	/****
+	 * Convierte una lista de precios a un string en formato JSON.
+	 * 
+	 * @param precios Lista de precios.
+	 * @return String en formato JSON.
+	 */
 	public String costesEnPreciosAJson(ArrayList<Precio> precios) {
 		String resul = null;
 		if (!precios.isEmpty()) {

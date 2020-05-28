@@ -83,7 +83,7 @@ public class ProductoDAO {
 	 * Obtiene una lista de los productos sin precio de un usuario.
 	 * 
 	 * @param idUsuario ID del usuario.
-	 * @return Lista de productos de una lista que todabía no tienen precios.
+	 * @return Lista de productos que todabía no tienen precios de una lista.
 	 */
 	public static ArrayList<ProductoSinPrecio> productosSinPrecioPorUserId(Integer idUsuario) {
 		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
