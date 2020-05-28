@@ -59,9 +59,9 @@ public class AddProducto extends HttpServlet {
 
 	/****
 	 * Método POST que obtiene el usuario de la sesión, enlace del producto, el
-	 * nombre de la lista y el precio objetivo de los parametros. Si el usuario está
-	 * logueado y los parametros del producto no están vacíos añade un producto a la
-	 * lista. También, si el parametro del nombre de la lista no está vacío crea una
+	 * nombre de la lista y el precio objetivo de los parámetros. Si el usuario está
+	 * logueado y los parámetros del producto no están vacíos añade un producto a la
+	 * lista. También, si el parámetro del nombre de la lista no está vacío crea una
 	 * lista para el usuario.
 	 * 
 	 * Si consigue añadir un producto o crear una lista con un producto redirige a

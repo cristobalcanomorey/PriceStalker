@@ -21,6 +21,9 @@ public class Logout extends HttpServlet {
 	SesionesEJB sesionesEJB;
 
 	@Override
+	/****
+	 * Método GET que termina la sesión de un usuario.
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");

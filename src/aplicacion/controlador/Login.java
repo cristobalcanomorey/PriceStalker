@@ -27,6 +27,9 @@ public class Login extends HttpServlet {
 	UsuariosEJB usuariosEJB;
 
 	@Override
+	/****
+	 * Método GET que muestra la página Login.
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -54,6 +57,9 @@ public class Login extends HttpServlet {
 	}
 
 	@Override
+	/****
+	 * Método POST que inicia la sesión de un usuario.
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");

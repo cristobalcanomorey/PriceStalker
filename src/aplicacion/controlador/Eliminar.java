@@ -28,6 +28,10 @@ public class Eliminar extends HttpServlet {
 	ProductosEJB productosEJB;
 
 	@Override
+	/****
+	 * Método GET que obtiene el usuario de la sesión y el ID de un producto por
+	 * parámetro.
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -35,8 +39,15 @@ public class Eliminar extends HttpServlet {
 		LogSingleton log = LogSingleton.getInstance();
 		Usuario usuario = sesionesEJB.usuarioLogeado(session);
 		String idContenido = request.getParameter("producto");
+		/**
+		 * Comprueba si ha conseguido los datos necesarios, si no redirige a Principal.
+		 */
 		if (usuario != null & idContenido != null) {
 			ProductoSinPrecio producto = productosEJB.getProductoAEliminar(idContenido, usuario.getId());
+			/**
+			 * Si el producto existe y es accesible para el usuario muestra la página
+			 * Eliminar. Si no, redirige a Principal.
+			 */
 			if (producto != null) {
 				RequestDispatcher rs = getServletContext().getRequestDispatcher("/PaginaEliminar.jsp");
 				request.setAttribute("usuario", usuario);
@@ -55,6 +66,9 @@ public class Eliminar extends HttpServlet {
 	}
 
 	@Override
+	/****
+	 * Método POST que elimina el producto de una lista.
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");

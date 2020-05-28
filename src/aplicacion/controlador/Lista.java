@@ -31,6 +31,9 @@ public class Lista extends HttpServlet {
 	ListasEJB listasEJB;
 
 	@Override
+	/****
+	 * Método GET que muestra la página Lista de productos.
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");

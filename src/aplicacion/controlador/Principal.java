@@ -23,6 +23,9 @@ public class Principal extends HttpServlet {
 	SesionesEJB sesionesEJB;
 
 	@Override
+	/****
+	 * Método GET que muestra la página principal.
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");

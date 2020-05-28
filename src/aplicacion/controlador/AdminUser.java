@@ -63,7 +63,7 @@ public class AdminUser extends HttpServlet {
 	/****
 	 * Método POST que obtiene el usuario de la sesión, el nombre, correo,
 	 * contraseña actual, la nueva contraseña y la nueva contraseña repetida de los
-	 * parametros para modificar los datos del usuario logueado con estos.
+	 * parámetros para modificar los datos del usuario logueado con estos.
 	 * 
 	 * Si el usuario ha sido modificado cierra la sesión con el usuario antiguo y
 	 * redirige a Login.

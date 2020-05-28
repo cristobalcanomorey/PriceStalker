@@ -31,6 +31,9 @@ public class Registro extends HttpServlet {
 	UsuariosEJB usuariosEJB;
 
 	@Override
+	/****
+	 * Método GET que muestra la página Registro.
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -54,6 +57,9 @@ public class Registro extends HttpServlet {
 	}
 
 	@Override
+	/****
+	 * Método POST que registra un usuario nuevo en la BBDD e inicia su sesión.
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
