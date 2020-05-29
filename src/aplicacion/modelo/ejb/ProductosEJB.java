@@ -147,7 +147,7 @@ public class ProductosEJB {
 			Integer id = ProductoDAO.getIdDelProductoPorEnlace(producto.getLink());
 			if (id != null) {
 				guardarImgEnDisco(imageBytes,
-						"/home/tofol/PriceStalker/PriceStalker/WebContent/imgs/ProductoDeAmazon" + id + ".jpg");
+						"/home/ubuntu/PriceStalker/PriceStalker/WebContent/imgs/ProductoDeAmazon" + id + ".jpg");
 				producto.setImgLink("imgs/ProductoDeAmazon" + id + ".jpg");
 			}
 		}

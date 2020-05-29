@@ -37,7 +37,7 @@ public class TimerPriceStalkerEJB {
 	private int numeroDeProductos = 0;
 
 	@SuppressWarnings("unused")
-	@Schedule(second = "0", minute = "56", hour = "12", dayOfWeek = "*", dayOfMonth = "*", month = "*", year = "*", info = "MyTimer")
+	@Schedule(second = "0", minute = "0", hour = "12", dayOfWeek = "*", dayOfMonth = "*", month = "*", year = "*", info = "MyTimer")
 	/****
 	 * Hace scraping de todos los productos una vez al día y manda un correo a los
 	 * usuarios que tengan como precio objetivo un precio inferior al precio actual
