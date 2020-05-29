@@ -27,7 +27,8 @@ public class ScraperEJB {
 		LogSingleton log = LogSingleton.getInstance();
 		Document doc;
 		try {
-			doc = Jsoup.connect(link).get();
+			doc = Jsoup.connect(link)
+					.userAgent("Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:76.0) Gecko/20100101 Firefox/76.0").get();
 		} catch (IOException e) {
 			log.getLoggerScraperEJB().error("Se ha producido un error en ScraperEJB: " + e);
 			return null;
@@ -67,14 +68,18 @@ public class ScraperEJB {
 	}
 
 	/****
-	 * Forma un objeto ProductoScraped a partir del título y precio de un producto.
-	 * Específico para los productos de Amazon.
+	 * Forma un objeto ProductoScraped a partir del título, precio de un producto y
+	 * su imágen en forma de bytes o por su enlace. Específico para los productos de
+	 * Amazon.
 	 * 
-	 * @param titulo       Título de un producto.
-	 * @param precioString Precio de un producto.
+	 * @param titulo       Título del producto.
+	 * @param precioString Precio del producto.
+	 * @param imageBytes   Bytes de la imágen.
+	 * @param enlaceImg    Enlace de la imágen del producto sin codificar.
 	 * @return ProductoScraped.
 	 */
-	private ProductoScraped formarProductoScrapedDeAmazon(String titulo, String precioString) {
+	private ProductoScraped formarProductoScrapedDeAmazon(String titulo, String precioString, byte[] imageBytes,
+			String enlaceImg) {
 		LogSingleton log = LogSingleton.getInstance();
 		if (!titulo.equals("") & !precioString.equals("")) {
 			precioString = quitarSimboloEuro(precioString);
@@ -88,10 +93,42 @@ public class ScraperEJB {
 			log.getLoggerScraperEJB().error("Se ha producido un error en ScraperEJB: " + e);
 		}
 		if (!titulo.equals("") & !precioString.equals("")) {
-			return new ProductoScraped(titulo, precio, "imgs/ProductoDeAmazon.png");
-		} else {
-			return null;
+			if (imageBytes != null) {
+				return new ProductoScraped(titulo, precio, imageBytes);
+			} else if (enlaceImg != null) {
+				return new ProductoScraped(titulo, precio, enlaceImg);
+			}
 		}
+		return null;
+	}
+
+	/****
+	 * Obtiene la imágen de Amazon, la descodifica y la guarda en un array de bytes.
+	 * 
+	 * @param doc Documento HTML.
+	 * @return Imágen de Amazon en forma de array de bytes.
+	 */
+	public byte[] obtenImgDeAmazon(Document doc) {
+		LogSingleton log = LogSingleton.getInstance();
+		// Obtener un enlace a la foto del producto de amazon
+		try {
+			Element e = doc.select("#landingImage").first();
+			if (e != null) {
+				String s = e.attr("src");
+				if (s != null) {
+					// Tenemos foto en formato base64. La decodificamos y la guardamos a disco
+
+					// si la imágen no está codificada lanza una excepción
+					String encodedImg = s.split(",")[1];
+					byte[] imageBytes = javax.xml.bind.DatatypeConverter.parseBase64Binary(encodedImg);
+
+					return imageBytes;
+				}
+			}
+		} catch (Exception e) {
+			log.getLoggerScraperEJB().error("Se ha producido un error en ScraperEJB: " + e);
+		}
+		return null;
 	}
 
 	/****
@@ -134,15 +171,40 @@ public class ScraperEJB {
 		} catch (NullPointerException e) {
 			log.getLoggerScraperEJB().error("Se ha producido un error en ScraperEJB: " + e);
 		}
+		/**
+		 * Obtiene la imágen de Amazon
+		 */
+		byte[] imageBytes = obtenImgDeAmazon(doc);
 		if (!titulos.isEmpty()) {
 			for (String titulo : titulos) {
 				if (!titulo.equals("")) {
 					for (String precio : precios) {
 						if (!precio.equals("")) {
-							return formarProductoScrapedDeAmazon(titulo, precio);
+							/**
+							 * Si no ha conseguido la imágen comprueba si la imágen no está codificada.
+							 */
+							if (imageBytes == null) {
+								try {
+									Element e = doc.select("#landingImage").first();
+									String s = e.attr("src");
+									/**
+									 * Si la imágen no está codificada guarda el enlace en el producto.
+									 */
+									if (s.startsWith("https://")) {
+										return formarProductoScrapedDeAmazon(titulo, precio, null, s);
+									}
+								} catch (Exception e) {
+									log.getLoggerScraperEJB().error("Se ha producido un error en ScraperEJB: " + e);
+								}
+							} else {
+								return formarProductoScrapedDeAmazon(titulo, precio, imageBytes, null);
+							}
 						}
 					}
-					return formarProductoScrapedDeAmazon(titulo, "");
+					/**
+					 * Si el precio se deja en blanco se marca el producto como no disponible.
+					 */
+					return formarProductoScrapedDeAmazon(titulo, "", imageBytes, null);
 				}
 			}
 		}

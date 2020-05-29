@@ -40,4 +40,6 @@ public interface ProductosMapper {
 
 	public void eliminarDefectuosos();
 
+	public Integer getIdDelProductoPorEnlace(@Param("link") String link);
+
 }

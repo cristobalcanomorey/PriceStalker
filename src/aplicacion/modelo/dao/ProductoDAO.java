@@ -226,4 +226,14 @@ public class ProductoDAO {
 		}
 	}
 
+	public static Integer getIdDelProductoPorEnlace(String link) {
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			ProductosMapper productosMapper = sqlSession.getMapper(ProductosMapper.class);
+			return productosMapper.getIdDelProductoPorEnlace(link);
+		} finally {
+			sqlSession.close();
+		}
+	}
+
 }

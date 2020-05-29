@@ -1,5 +1,6 @@
 package aplicacion.modelo.ejb;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 import javax.ejb.LocalBean;
@@ -136,12 +137,41 @@ public class ProductosEJB {
 	}
 
 	/****
-	 * Modifica las características de un producto.
+	 * Modifica las características de un producto. Si la imágen se ha obtenido de
+	 * Amazon se guarda en disco.
 	 * 
 	 * @param producto Producto con las nuevas características.
 	 */
-	public void updateCaracteristicasDeProducto(CaracteristicasDeProducto producto) {
+	public void updateCaracteristicasDeProducto(CaracteristicasDeProducto producto, byte[] imageBytes) {
+		if (imageBytes != null) {
+			Integer id = ProductoDAO.getIdDelProductoPorEnlace(producto.getLink());
+			if (id != null) {
+				guardarImgEnDisco(imageBytes,
+						"/home/tofol/PriceStalker/PriceStalker/WebContent/imgs/ProductoDeAmazon" + id + ".jpg");
+				producto.setImgLink("imgs/ProductoDeAmazon" + id + ".jpg");
+			}
+		}
+
 		ProductoDAO.updateCaracteristicasDeProducto(producto);
+	}
+
+	/****
+	 * Guarda la imágen en el disco duro.
+	 * 
+	 * @param imageBytes Imágen en forma de bytes.
+	 * @param ruta       Ruta absoluta de la imágen.
+	 */
+	public void guardarImgEnDisco(byte[] imageBytes, String ruta) {
+		LogSingleton log = LogSingleton.getInstance();
+		FileOutputStream fos;
+		try {
+			fos = new FileOutputStream(ruta);
+			fos.write(imageBytes);
+			fos.close();
+		} catch (Exception e) {
+			log.getLoggerProductosEJB().error("Se ha producido un error en ProductosEJB: " + e);
+		}
+
 	}
 
 	/****

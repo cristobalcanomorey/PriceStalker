@@ -37,7 +37,7 @@ public class TimerPriceStalkerEJB {
 	private int numeroDeProductos = 0;
 
 	@SuppressWarnings("unused")
-	@Schedule(second = "0", minute = "0", hour = "16", dayOfWeek = "*", dayOfMonth = "*", month = "*", year = "*", info = "MyTimer")
+	@Schedule(second = "0", minute = "56", hour = "12", dayOfWeek = "*", dayOfMonth = "*", month = "*", year = "*", info = "MyTimer")
 	/****
 	 * Hace scraping de todos los productos una vez al día y manda un correo a los
 	 * usuarios que tengan como precio objetivo un precio inferior al precio actual
@@ -78,7 +78,8 @@ public class TimerPriceStalkerEJB {
 						caracteristicasDeProducto.setNombre(productoScraped.getNombre());
 						caracteristicasDeProducto.setImgLink(productoScraped.getImgLink());
 
-						productosEJB.updateCaracteristicasDeProducto(caracteristicasDeProducto);
+						productosEJB.updateCaracteristicasDeProducto(caracteristicasDeProducto,
+								productoScraped.getImageBytes());
 						productosEJB.insertPrecio(caracteristicasDeProducto.getId(), productoScraped);
 						/**
 						 * Si el producto está disponible y comprueba si su valor actual es inferior del

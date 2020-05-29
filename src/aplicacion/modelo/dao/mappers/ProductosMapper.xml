@@ -85,6 +85,10 @@ where id in (select distinct idProducto from contenido order by idProducto);
 	select * from producto
 where id in (select distinct idProducto from contenido order by idProducto);
 	</select>
+	
+	<select id="getIdDelProductoPorEnlace" resultType="java.lang.Integer">
+	select id from producto where link = #{link}
+	</select>
 		
 	<update id="updateCaracteristicasDeProducto">
 	UPDATE producto SET nombre = #{nombre}, imgLink = #{imgLink}
